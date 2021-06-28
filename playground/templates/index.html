@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playground</title>
+    <style>
+    #wrapper{
+        margin: 0px auto;
+        width: 1000px;
+        height: fit-content;
+        border: dashed red 1px;
+    }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Houston, we have lift off.</h1>
+        <p>Phrase: {{ phrase }}</p>
+        <p>Times: {{ times }}</p>
+        {% for x in range(0,times): %}
+            <p>{{ phrase }}</p>
+        {% endfor %}
+        {% if phrase == "Houston, we have a problem." %}
+            <p>**BOOM**</p>
+        {% endif %}
+    </div>
+</body>
+</html>
