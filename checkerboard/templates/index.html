@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkerboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div id="wrapper">
+    <h1 id="head">Houston, We have liftoff.</h1>
+    <table>
+            {% for i in range(num_rows) %}
+            <tr>
+                {% for j in range(num_cols) %}
+                <td class="color{{ (i+j)%2+1 }}"></td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+</div>
+</body>
+</html>
