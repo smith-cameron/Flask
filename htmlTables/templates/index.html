@@ -3,12 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skeleton</title>
+    <title>Table Rendering</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 <div id="wrapper">
     <h1 id="head">Houston, We have liftoff.</h1>
+    <table>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Full Name</th>
+        </tr>
+        <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{user['first_name']}}</td>
+            <td>{{user['last_name']}}</td>
+            <td>{{user['first_name']}} {{user['last_name']}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

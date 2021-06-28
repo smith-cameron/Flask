@@ -8,3 +8,14 @@
 #head{
     text-align: center;
 }
+td, th{
+    text-align: center;
+    padding: 5px 10px;
+}
+table, th, td{
+    border: solid thin black;
+    border-collapse: collapse;
+}
+table{
+    margin: 0px auto;
+}
