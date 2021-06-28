@@ -1,10 +1,23 @@
 from flask import Flask, render_template
-app = Flask(__name__)
+playground = Flask(__name__)
 
-@app.route('/')
-def hello_world():
+@playground.route('/play')
+def blue3():
+    return render_template('index.html', times=3 )
 
-    return render_template('index.html', phrase="Houston, we have a problem.", times=5)
+@playground.route('/play/<num>')
+def blueX(num):
+    if num.isdigit():
+        return render_template('index.html', times=int(num) )
 
+@playground.route('/play/<num>/<color>')
+def colorX(num, color):
+    if num.isdigit() and type(color) == str:
+        return render_template('index.html', times=int(num), color=color )
+
+@playground.route('/', defaults={'path': ''})
+@playground.route('/<path:path>')
+def catch_all(path):
+    return 'Invalid URL.'
 if __name__=="__main__":
-    app.run(debug=True)
+    playground.run(debug=True)

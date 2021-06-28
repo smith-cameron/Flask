@@ -7,23 +7,40 @@
     <style>
     #wrapper{
         margin: 0px auto;
-        width: 1000px;
+        width: 900px;
         height: fit-content;
         border: dashed red 1px;
+        padding:25px 0px;
+    }
+    #container{
+        margin: auto;
+        display: inline-block;
+    }
+    #head{
+        text-align: center;
+        font-family: Arial;
+        text-decoration: underline;
+    }
+    .box{
+        display: inline-block;
+        margin: 30px;
+        width: 150px;
+        height: 150px;
+        border: solid black 1px;
+        border-radius: 10px;
+        background-color: #0099cc;
+        box-shadow: 1px 2px 2px #252525;
     }
     </style>
 </head>
 <body>
     <div id="wrapper">
-        <h1>Houston, we have lift off.</h1>
-        <p>Phrase: {{ phrase }}</p>
-        <p>Times: {{ times }}</p>
-        {% for x in range(0,times): %}
-            <p>{{ phrase }}</p>
-        {% endfor %}
-        {% if phrase == "Houston, we have a problem." %}
-            <p>**BOOM**</p>
-        {% endif %}
+        <h1 id="head">Welcome!</h1>
+        <div id="container">
+            {% for i in range(0, times) %}
+                <div class="box" style="background-color: {{color}}"></div>
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>
