@@ -1,5 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, session
+
 app = Flask(__name__)
+app.secret_key = 'secret_keyy'
 
 @app.route('/')
 def index():
