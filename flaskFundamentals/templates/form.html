@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms Practice</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    {# <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script> #}
+</head>
+<body>
+<div id="wrapper">
+    <h1 id="head">Index Page</h1>
+    <h3>Register</h3>
+    <form action='/form' method='post'>
+        <input type="hidden" name="action" value="register">
+        Name: <input type='text' name='name'>
+        Email: <input type='text' name='email'>
+        <input type='submit' value='create user'>
+    </form>
+    <h3>Login </h3>
+    <form action='/form' method='post'>
+        <input type="hidden" name="action" value="login">
+        Email: <input type='text' name='email'>
+        Password: <input type='text' name='password'>
+        <input type='submit' value='create user'>
+    </form>
+</div>
+</body>
+</html>
