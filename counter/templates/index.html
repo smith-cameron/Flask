@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+<div id="wrapper">
+    <h1 id="head">Counter</h1>
+    <h2 id="subhead">{{session['count']}} times</h2>
+    <div class="buttons">
+        <a class="link" href="/reset">RESET</a>
+        <a class="link" href="/twice">Double Down</a>
+    </div>
+    <!-- <div class="buttons">
+        <form action="/form" method="POST">
+            <input type="hidden" name="action" value="reset">
+            <button type="submit">RESET</button>
+        </form>
+        <form action="/form" method="POST">
+            <input type="hidden" name="action" value="twice">
+            <button type="submit">Double Down</button>
+        </form>
+    </div> -->
+</div>
+</body>
+</html>
