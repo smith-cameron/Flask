@@ -1,6 +1,6 @@
 #wrapper{
     margin: 0px auto;
-    padding:25px 0px;
+    padding:15px 0px;
     width: 1000px;
     height: fit-content;
     border: dashed red 1px;
@@ -11,23 +11,8 @@
 }
 #head{
     text-align: center;
-    text-decoration: underline;
-}
-#subhead{
-    color:darkred;
-    text-align: center;
 }
 .link{
     margin: 0px 20px;
-    font-weight: bold;
-    background-color: beige;
-    padding: 5px 8px;
-    text-decoration:none;
-    border-radius: 8px;
-    color: black;
-}
-.buttons{
-    width: fit fit-content;
-    display: inline-block;
-    margin: auto;
+    color:blanchedalmond;
 }
