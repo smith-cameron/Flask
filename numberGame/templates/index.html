@@ -3,14 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>00Skeleton00</title>
+    <title>Guess Away</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
 </head>
 <body>
 <div id="wrapper">
-    <a class="link" href="/logout">Log Out</a>
-    <h1 id="head">Houston, We have liftoff.</h1>
+    <a class="link" href="/reset">Reset</a>
+    <h1 class="head">Welcome to the Number Guessing Game!</h1>
+    <h2 class="head">I am thinking of a number between 1 and 100. Can you guess it?</h2>
+    <div id="guessDiv">
+        <form action="/process" method="POST">
+            <input type="number" name="guess" id="guessInput" min="1" max="100"/>
+            <button type="submit">Guess</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>
