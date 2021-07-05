@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+<div id="wrapper">
+    <a class="link" href="/logout">Log Out</a>
+    <h1 id="head">Dojo Survey</h1>
+    <div id="formDiv">
+        <form action="/result" method="post">
+        <h4>Your Name: <input type="text" name="userName" class="formInput"></h4>
+        <h4>Dojo Location: <select class="formInput" name="location">
+            <option disabled selected value> -- select an option -- </option>
+            <option value="San Jose">San Jose</option>
+            <option value="San Miguel">San Miguel</option>
+            <option value="San Diego">San Diego</option>
+            <option value="San Francisco">San Francisco</option>
+            <option value="San Luise Obisbo">San Luise Obisbo</option>
+            <option value="San Juan Capistrano">San Juan Capistrano</option>
+        </select></h4>
+        <h4>Favorite Language: <select class="formInput" name="language">
+            <option disabled selected value> -- select an option -- </option>
+            <option value="">Select One</option>
+            <option value="Python">Python</option>
+            <option value="PHP">PHP</option>
+            <option value="Ruby">Ruby</option>
+            <option value="JavaScript">JavaScript</option>
+            <option value="C#">C#</option>
+            <option value="Java">Java</option>
+        </select></h4>
+        <h4>Comment (optonal): <textarea class="formInput" name="comment"></textarea></h4>
+        <input id="button" type="submit" value="Submit Survey"/>
+    </form>
+    </div>
+</div>
+</body>
+</html>
