@@ -7,10 +7,14 @@ app.secret_key = 'secret_keyy'
 def index():
     if 'count' not in session:
         session['count'] = 1
-        print(session['count'])
+        session['dd'] = 1
+        print("count: {}".format(session['count']))
+        print("dd: {}".format(session['dd']))
     else:
         session['count'] += 1
-        print(session['count'])
+        session['dd'] = session['count']
+        print("count: {}".format(session['count']))
+        print("dd: {}".format(session['dd']))
     return render_template('index.html')
 
 @app.route('/reset')
@@ -20,9 +24,13 @@ def reset():
 
 @app.route('/twice')
 def doubleDown():
-    session['count'] += 2
-    print(session['count'])
-    return render_template('index.html')
+    if session['dd'] == session['count']:
+        session['count'] += 2
+        # session['dd'] = session['count']
+        print("count: {}".format(session['count']))
+        print("dd: {}".format(session['dd']))
+        return render_template('index.html')
+    return redirect("/")
 
 # @app.route('/form', methods=['POST'])
 # def buttons():

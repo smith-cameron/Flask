@@ -13,7 +13,11 @@
     <h2 id="subhead">{{session['count']}} times</h2>
     <div class="buttons">
         <a class="link" href="/reset">RESET</a>
-        <a class="link" href="/twice">Double Down</a>
+        {% if session['count'] != session['dd'] %}
+            <a class="link" href="/twice">Go Back</a>
+        {% else %}
+            <a class="link" href="/twice">Double Down</a>
+        {% endif %}
     </div>
     <!-- <div class="buttons">
         <form action="/form" method="POST">

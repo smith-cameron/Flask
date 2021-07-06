@@ -29,5 +29,6 @@
 .buttons{
     width: fit fit-content;
     display: inline-block;
-    margin: auto;
+    margin: 0px auto;
+    text-align: center;
 }
