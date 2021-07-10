@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>My Friends</title>
+</head>
+<body>
+    <div id="wrapper">
+        <h1 id="head">All My Friends</h1>
+    {% for friend in allFriends %}
+        <p>First Name: {{friend["first_name"]}}</p>
+        <p>Last Name: {{friend["last_name"]}}</p>
+        <p>Email: {{friend["email"]}}</p>
+        <p>Occupation: {{friend["occupation"]}}</p>
+        <hr>
+    {% endfor %}
+        <h1>Add a Friend</h1>
+        <form action="/createFriend" method="POST">
+            <p>First Name: <input type="text" name="fname"></p>
+            <p>Last Name: <input type="text" name="lname"></p>
+            <p>Email: <input type="text" name="email"></p>
+            <p>Occupation: <input type="text" name="occ"></p>
+            <input type="submit" value="Add Friend">
+        </form>
+    </div>
+</body>
+</html>
