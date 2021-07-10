@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, session
+from mysqlDB import connectToMySQL    # import the function that will return an instance of a connection
 app = Flask(__name__)
 app.secret_key = 'Dont take any wooden nickles.'
 
@@ -41,6 +42,27 @@ def showUser():
     print("Showing the User Info From the Form")
     print(request.form)
     return render_template('show.html')
+
+@app.route("/friends")
+def showFriends():
+    mysql = connectToMySQL('first_flask')   # call the function, passing in the name of our db
+    friends = mysql.query_db('SELECT * FROM users;')  # call the query_db function, pass in the query as a string
+    print(friends)
+    return render_template("friends.html", allFriends = friends)
+
+@app.route("/createFriend", methods=["POST"])
+def addFriend():
+    print(request.form)
+    mysql = connectToMySQL('first_flask')
+    query = "INSERT INTO users (first_name, last_name, email, occupation, created_at, updated_at) VALUES (%(fn)s, %(ln)s, %(em)s, %(occup)s, NOW(), NOW());"
+    input = {
+        "fn" : request.form["fname"],
+        "ln" : request.form["lname"],
+        "em" : request.form["email"],
+        "occup" : request.form["occ"],
+    }
+    newFriendID = mysql.query_db(query, input)
+    return redirect("/friends")
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
