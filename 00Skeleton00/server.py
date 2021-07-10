@@ -1,13 +1,14 @@
 from flask import Flask, render_template, request, redirect, session
-from mysqlconnection import connectToMySQL
+from mysqlDB import connectToMySQL
 
 app = Flask(__name__)
 app.secret_key = 'secret_keyy'
 mysql = connectToMySQL('initflask')
-users = mysql.query_db('SELECT * FROM users;')
+
 
 @app.route('/')
 def index():
+    users = mysql.query_db('SELECT * FROM users;')
     print(users)
     return render_template('index.html')
 
