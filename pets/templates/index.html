@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <title>My Pets</title>
+</head>
+<body>
+<div id="wrapper">
+    <h1 id="head">All the Pets!</h1>
+    <table id="displayTable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pet in allMyPets %}
+        <tr>
+            <td class="tableData">{{pet["id"]}}</td>
+            <td class="tableData">{{pet["name"]}}</td>
+            <td class="tableData">{{pet["type"]}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    <h1>Add a Pet</h1>
+    <form action="/addPet" method="POST">
+        <p>Name: <input type="text" name="name"></p>
+        <p>Type: <input type="text" name="type"></p>
+        <input type="submit" value="Add Pet">
+    </form>
+</div>
+</body>
+</html>
