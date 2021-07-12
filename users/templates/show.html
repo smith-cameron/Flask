@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title> Info</title>
+</head>
+<body>
+<div id="wrapper">
+    {% for user in users %}
+    <a href="/users" class="link">Home</a>
+    <h1 id="head">User {{user.id}}</h1>
+    <hr>
+    <h3 class="subHead">Full Name: {{user.first_name}} {{user.last_name}}</h3>
+    <h3 class="subHead">Email: {{user.email}}</h3>
+    <h3 class="subHead">Created: {{user.created_at.strftime(ctf)}}</h3>
+    {% if user.created_at != None %}
+        <h3 class="subHead">Last Updated: {{user.updated_at.strftime(utf)}}</h3>
+        {% else %}
+            <p class="subHead">No Updates </p>
+    {% endif %}
+    {% endfor %}
+</div>
+</body>
+</html>

@@ -3,14 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>00Skeleton00</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <title>All the Users</title>
 </head>
 <body>
 <div id="wrapper">
-    <a class="link" href="/logout">Log Out</a>
-    <h1 id="head">Houston, We have liftoff.</h1>
+    <a href="/users/new" class="navLink">Create New User</a>
+    <h1 id="head">All Users</h1>
+    <table id="displayTable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Created</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in allUsers %}
+        <tr>
+            <td class="tableData" >{{user.id}}</td>
+            <td class="tableData">{{user.first_name}} {{user.last_name}}</td>
+            <td class="tableData">{{user.email}}</td>
+            <td class="tableData">{{user.created_at.strftime(dtf)}}</td>
+            <td class="tableData"><a class="link" href="/users/{{user.id}}">Show</a> | <a class="link" href="/users/{{user.id}}/edit">Edit</a> | <a class="link" href="/users/{{user.id}}/delete">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
 </div>
 </body>
 </html>

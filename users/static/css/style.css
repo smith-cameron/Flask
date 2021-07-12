@@ -1,6 +1,6 @@
 #wrapper{
     margin: 0px auto;
-    padding:15px 0px;
+    padding:15px 10px;
     width: 1000px;
     height: fit-content;
     border: dashed red 1px;
@@ -12,7 +12,23 @@
 #head{
     text-align: center;
 }
+.subHead{
+    text-align: center;
+}
 .link{
-    margin: 0px 20px;
-    color:blanchedalmond;
+    color:lightcoral;
+}
+.navLink{
+    margin: 10px 25px;
+    color:lightcoral;
+}
+#displayTable{
+    display:block;
+    margin: 0px auto;
+    width: 800px;
+    border-collapse: collapse;
+}
+.tableData{
+    padding: 8px 10px;
+    border: thin solid black;
 }
