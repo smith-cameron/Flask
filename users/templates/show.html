@@ -9,8 +9,8 @@
 </head>
 <body>
 <div id="wrapper">
-    {% for user in users %}
     <a href="/users" class="link">Home</a>
+    {% for user in users %}
     <h1 id="head">User {{user.id}}</h1>
     <hr>
     <h3 class="subHead">Full Name: {{user.first_name}} {{user.last_name}}</h3>

@@ -11,7 +11,7 @@ updateFormat = "%B-%d-%Y at %-I:%M %p"
 def index():
     mysql = connectToMySQL('SemiRestfulUsers')
     query = mysql.query_db('SELECT * FROM users;')
-    print(query)
+    #print(query)
     return render_template('index.html', allUsers = query, dtf = createFormat)
 
 @app.route('/users/new')
@@ -20,16 +20,16 @@ def createPage():
 
 @app.route('/users/create', methods = ["POST"])
 def createUser():
-    print(request.form)
+    #print(request.form)
     mysql = connectToMySQL('SemiRestfulUsers')
     query = "INSERT INTO users (first_name, last_name, email, created_at) VALUES (%(fn)s, %(ln)s, %(e)s, NOW());"
     data = {
-        "fn": request.form["firstName"],
-        "ln": request.form["lastName"],
-        "e": request.form["email"]
+        "fn" : request.form["firstName"],
+        "ln" : request.form["lastName"],
+        "e" : request.form["email"]
     }
     newUser = mysql.query_db(query, data)
-    print(newUser)
+    #print(newUser)
     return redirect('/users')
 
 @app.route('/users/<user_id>')
@@ -40,19 +40,33 @@ def show(user_id):
     }
     mysql = connectToMySQL('SemiRestfulUsers')
     thisUser = mysql.query_db(query, data)
-    print(thisUser)
+    #print(thisUser)
     return render_template('show.html', users = thisUser, ctf = createFormat, utf = updateFormat)
 
 @app.route('/users/<user_id>/edit')
-def delete(user_id):
+def edit(user_id):
     query = ('SELECT * FROM users WHERE id = %(id)s;')
     data = {
         "id" : user_id
     }
     mysql = connectToMySQL('SemiRestfulUsers')
     thisUser = mysql.query_db(query, data)
-    print(thisUser)
-    return render_template('show.html', users = thisUser, ctf = createFormat, utf = updateFormat)
+    #print(thisUser)
+    return render_template('edit.html', users = thisUser, ctf = createFormat, utf = updateFormat)
+
+@app.route('/users/<user_id>/edit', methods=['POST'])
+def editPost(user_id):
+    query = "UPDATE users SET first_name = %(fn)s, last_name = %(ln)s, email = %(e)s, updated_at = NOW() WHERE id = %(id)s;"
+    formData = {
+        "fn" : request.form["firstName"],
+        "ln" : request.form["lastName"],
+        "e" : request.form["email"],
+        "id" : user_id
+    }
+    print(user_id)
+    mysql = connectToMySQL('SemiRestfulUsers')
+    mysql.query_db(query, formData)
+    return redirect('/users')
 
 @app.route('/users/<user_id>/delete')
 def delete(user_id):
@@ -62,7 +76,7 @@ def delete(user_id):
     }
     mysql = connectToMySQL('SemiRestfulUsers')
     toDelete = mysql.query_db(query, data)
-    print(toDelete)
+    #print(toDelete)
     return redirect('/users')
 
 @app.route('/', defaults={'path': ''})

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Edit</title>
+</head>
+<body>
+<div id="wrapper">
+    <a href="/users" class="link">Home</a>
+    {% for user in users %}
+    <h1 id="head">Edit {{user.first_name}}'s Info</h1>
+    <div id="inputForm" >
+        <form action="/users/{{user.id}}/edit" method="POST">
+            <p>First Name: <input type="text" name="firstName" value="{{user.first_name}}"></p>
+            <p>Last Name: <input type="text" name="lastName" value="{{user.last_name}}"></p>
+            <p>Email: <input type="text" name="email" value="{{user.email}}"></p>
+            <input type="submit" value="Edit User">
+        </form>
+    </div>
+    {% endfor %}
+</div>
+</body>
+</html>
