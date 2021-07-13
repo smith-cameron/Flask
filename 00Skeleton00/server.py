@@ -1,13 +1,14 @@
 from flask import Flask, render_template, request, redirect, session
 from mysqlDB import connectToMySQL
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = 'secret_keyy'
-mysql = connectToMySQL('initflask')
-
+dateFormat = "%m/%d/%Y"
 
 @app.route('/')
 def index():
+    mysql = connectToMySQL('initflask')
     users = mysql.query_db('SELECT * FROM users;')
     print(users)
     return render_template('index.html')
