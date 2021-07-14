@@ -9,17 +9,19 @@
 </head>
 <body>
 <div id="wrapper">
-    <a href="/users" class="link">Home</a>
     {% for user in users %}
+    <div id="linkNav">
+    <a href="/users" class="link">Home</a> | <a class="link" href="/users/{{user.id}}/edit">Edit</a> | <a class="link" href="/users/{{user.id}}/delete">Delete</a>
+    </div>
     <h1 id="head">User {{user.id}}</h1>
     <hr>
     <h3 class="subHead">Full Name: {{user.first_name}} {{user.last_name}}</h3>
     <h3 class="subHead">Email: {{user.email}}</h3>
     <h3 class="subHead">Created: {{user.created_at.strftime(ctf)}}</h3>
-    {% if user.created_at != None %}
-        <h3 class="subHead">Last Updated: {{user.updated_at.strftime(utf)}}</h3>
-        {% else %}
-            <p class="subHead">No Updates </p>
+    {% if user.updated_at == None %}
+    <p class="subHead">No Updates </p>
+    {% else %}
+    <h3 class="subHead">Last Updated: {{user.updated_at.strftime(utf)}}</h3>
     {% endif %}
     {% endfor %}
 </div>

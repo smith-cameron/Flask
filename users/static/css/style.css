@@ -1,6 +1,6 @@
 #wrapper{
     margin: 0px auto;
-    padding:15px 10px;
+    padding:15px 10px 25px;
     width: 1000px;
     height: fit-content;
     border: dashed red 1px;
@@ -18,6 +18,10 @@
 .link{
     color:lightcoral;
 }
+#linkNav{
+    padding-left: 60px;
+    margin-top: 20px;
+}
 .navLink{
     margin: 10px 25px;
     color:lightcoral;
@@ -25,7 +29,7 @@
 #displayTable{
     display:block;
     margin: 0px auto;
-    width: 800px;
+    width: 750px;
     border-collapse: collapse;
 }
 .tableData{

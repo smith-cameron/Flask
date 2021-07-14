@@ -28,9 +28,8 @@ def createUser():
         "ln" : request.form["lastName"],
         "e" : request.form["email"]
     }
-    newUser = mysql.query_db(query, data)
-    #print(newUser)
-    return redirect('/users')
+    user_id = mysql.query_db(query, data)
+    return redirect(f'/users/{user_id}')
 
 @app.route('/users/<user_id>')
 def show(user_id):
@@ -40,7 +39,7 @@ def show(user_id):
     }
     mysql = connectToMySQL('SemiRestfulUsers')
     thisUser = mysql.query_db(query, data)
-    #print(thisUser)
+    print(thisUser)
     return render_template('show.html', users = thisUser, ctf = createFormat, utf = updateFormat)
 
 @app.route('/users/<user_id>/edit')
@@ -51,7 +50,7 @@ def edit(user_id):
     }
     mysql = connectToMySQL('SemiRestfulUsers')
     thisUser = mysql.query_db(query, data)
-    #print(thisUser)
+    print(thisUser)
     return render_template('edit.html', users = thisUser, ctf = createFormat, utf = updateFormat)
 
 @app.route('/users/<user_id>/edit', methods=['POST'])
@@ -70,13 +69,13 @@ def editPost(user_id):
 
 @app.route('/users/<user_id>/delete')
 def delete(user_id):
-    query = ('DELETE * FROM users where id = %(id)s;')
+    query = ('DELETE FROM users where id = %(id)s;')
     data = {
         'id': user_id
     }
     mysql = connectToMySQL('SemiRestfulUsers')
-    toDelete = mysql.query_db(query, data)
-    #print(toDelete)
+    print(user_id)
+    mysql.query_db(query, data)
     return redirect('/users')
 
 @app.route('/', defaults={'path': ''})
