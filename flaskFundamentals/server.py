@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, flash
 from mysqlDB import connectToMySQL    # import the function that will return an instance of a connection
 app = Flask(__name__)
 app.secret_key = 'Dont take any wooden nickles.'
@@ -50,19 +50,50 @@ def showFriends():
     print(friends)
     return render_template("friends.html", allFriends = friends)
 
-@app.route("/createFriend", methods=["POST"])
-def addFriend():
-    print(request.form)
-    mysql = connectToMySQL('first_flask')
-    query = "INSERT INTO users (first_name, last_name, email, occupation, created_at, updated_at) VALUES (%(fn)s, %(ln)s, %(em)s, %(occup)s, NOW(), NOW());"
-    input = {
-        "fn" : request.form["fname"],
-        "ln" : request.form["lname"],
-        "em" : request.form["email"],
-        "occup" : request.form["occ"],
-    }
-    newFriendID = mysql.query_db(query, input)
-    return redirect("/friends")
+# @app.route("/createFriend", methods=["POST"])
+# def addFriend():
+#     print(request.form)
+#     mysql = connectToMySQL('first_flask')
+#     query = "INSERT INTO users (first_name, last_name, email, occupation, created_at, updated_at) VALUES (%(fn)s, %(ln)s, %(em)s, %(occup)s, NOW(), NOW());"
+#     input = {
+#         "fn" : request.form["fname"],
+#         "ln" : request.form["lname"],
+#         "em" : request.form["email"],
+#         "occup" : request.form["occ"],
+#     }
+#     newFriendID = mysql.query_db(query, input)
+#     return redirect("/friends")
+
+@app.route('/createFriend', methods=['POST'])
+def addFriendValidated():
+    #is_valid = True		# assume True
+    if len(request.form['fname']) < 1:
+        #is_valid = False
+        flash("First Name Required")
+    if len(request.form['lname']) < 1:
+        #is_valid = False
+        flash("Last Name Required")
+    if len(request.form['email']) < 1:
+        #is_valid = False
+        flash("Email Required")
+    if len(request.form['occ']) < 2:
+        #is_valid = False
+        flash("Occupation Required. Must be longer than 2 characters.")
+    #if is_valid:
+    if not '_flashes' in session.keys():
+        print(request.form)
+        mysql = connectToMySQL('first_flask')
+        query = "INSERT INTO users (first_name, last_name, email, occupation, created_at, updated_at) VALUES (%(fn)s, %(ln)s, %(em)s, %(occup)s, NOW(), NOW());"
+        input = {
+            "fn" : request.form["fname"],
+            "ln" : request.form["lname"],
+            "em" : request.form["email"],
+            "occup" : request.form["occ"],
+        }
+        newFriendID = mysql.query_db(query, input)
+        flash("Friend successfully added!")
+        return redirect('/friends')
+    return redirect('/')
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')

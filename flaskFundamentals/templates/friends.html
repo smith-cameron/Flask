@@ -18,6 +18,13 @@
         <hr>
     {% endfor %}
         <h1>Add a Friend</h1>
+        {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+            {% if messages %}                            <!-- check if there are any messages -->
+                {% for message in messages %}            <!-- loop through the messages -->
+                    <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <form action="/createFriend" method="POST">
             <p>First Name: <input type="text" name="fname"></p>
             <p>Last Name: <input type="text" name="lname"></p>
