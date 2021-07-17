@@ -3,14 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <title>00Skeleton00</title>
 </head>
 <body>
 <div id="wrapper">
-    <a class="link" href="/logout">Log Out</a>
-    <h1 id="head">Houston, We have liftoff.</h1>
+    <h1 id="head">Dojo Survey</h1>
+    <div id="formDiv">
+        <form action="/postData" method="post">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p id="error">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <h4>Your Name: <input type="text" name="userName" class="formInput"></h4>
+        <h4>Dojo Location: <select class="formInput" name="location">
+            <option disabled selected value> -- select an option -- </option>
+            {% for loc in locations %}
+                <option value={{loc['id']}}>{{loc["name"]}}</option>
+            {% endfor %}
+        </select></h4>
+        <h4>Favorite Language: <select class="formInput" name="language">
+            <option disabled selected value> -- select an option -- </option>
+            {% for lang in languages %}
+                <option value={{lang['id']}}>{{lang["name"]}}</option>
+            {% endfor %}
+        </select></h4>
+        <h4>Comment (optonal): <textarea class="formInput" name="comment"></textarea></h4>
+        <input id="button" type="submit" value="Submit Survey"/>
+    </form>
+    </div>
+    <div id="displayTable">
+            {% for ninja in ninjas %}
+            <a href="/show/{{ninja.id}}"><h4>{{ninja.userName}}</h4></a>
+            {% endfor %}
+        </div>
 </div>
 </body>
 </html>

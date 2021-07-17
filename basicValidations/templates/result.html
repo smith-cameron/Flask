@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <a class="link" href="/">Go Back</a>
+        <h1 id="head">Results</h1>
+        <div id="displayTable">
+            {% for n in ninja %}
+            <h4>{{n.userName}}</h4>
+            <h4>{{n.locId['name']}}</h4>
+            <h4>{{n.langId['name']}}</h4>
+            <h4>{{n.comment}}</h4>
+            {% endfor %}
+        </div>
+
+    </div>
+</body>
+</html>

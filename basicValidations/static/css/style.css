@@ -8,6 +8,7 @@
     background: rgb(92,97,176);
     background: radial-gradient(circle, rgba(92,97,176,1) 0%, rgba(40,46,91,1) 84%);
     color: blanchedalmond;
+    
 }
 #head{
     text-align: center;
@@ -15,4 +16,20 @@
 .link{
     margin: 0px 20px;
     color:blanchedalmond;
+}
+#formDiv{
+    text-align: center;
+    border-top: thin black solid ;
+    margin: 0px auto;
+    padding: 0px 10px;
+}
+#button{
+    margin-bottom: 20px;
+}
+#displayTable{
+    border-top: solid black thin;
+    text-align: center;
+}
+#error{
+    color:darkred;
 }
