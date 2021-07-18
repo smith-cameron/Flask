@@ -52,7 +52,19 @@ def resultsRender(id):
     }
     thisNinja = mysql.query_db(query, input)
     print(thisNinja)
-
+    mysql = connectToMySQL('basicValidations')
+    query = ('SELECT locId FROM ninjas WHERE id = %(n)s;')
+    thisLoc = mysql.query_db(query, input)
+    print(thisLoc)
+    mysql = connectToMySQL('basicValidations')
+    query = ('SELECT name FROM locations WHERE id = %(n)s;')
+    input = {
+        "n" : thisLoc
+    }
+    locName = mysql.query_db(query, input)
+    print(locName)
+    mysql = connectToMySQL('basicValidations')
+    thisLang = mysql.query_db('SELECT * FROM languages;')
     return render_template('result.html', ninja = thisNinja)
 
 @app.route('/', defaults={'path': ''})
