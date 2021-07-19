@@ -1,6 +1,6 @@
 #wrapper{
     margin: 0px auto;
-    padding:15px 0px;
+    padding:15px 20px;
     width: 1000px;
     height: fit-content;
     border: dashed red 1px;
@@ -8,13 +8,13 @@
     background: rgb(92,97,176);
     background: radial-gradient(circle, rgba(92,97,176,1) 0%, rgba(40,46,91,1) 84%);
     color: blanchedalmond;
-    
+
 }
 #head{
     text-align: center;
 }
 .link{
-    margin: 0px 20px;
+    /* margin: 0px 20px; */
     color:blanchedalmond;
 }
 #formDiv{
@@ -31,5 +31,5 @@
     text-align: center;
 }
 #error{
-    color:darkred;
+    color:crimson;
 }

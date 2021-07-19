@@ -18,17 +18,17 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        <h4>Your Name: <input type="text" name="userName" class="formInput"></h4>
-        <h4>Dojo Location: <select class="formInput" name="location">
-            <option disabled selected value> -- select an option -- </option>
+        <h4>Your User Name: <input type="text" name="userName" class="formInput"></h4>
+        <h4>Dojo Location: <select class="formInput" name="locId">
+            <option value=""> -- select an option -- </option>
             {% for loc in locations %}
                 <option value={{loc['id']}}>{{loc["name"]}}</option>
             {% endfor %}
         </select></h4>
-        <h4>Favorite Language: <select class="formInput" name="language">
-            <option disabled selected value> -- select an option -- </option>
+        <h4>Favorite Language: <select class="formInput" name="langId">
+            <option value=""> -- select an option -- </option>
             {% for lang in languages %}
-                <option value={{lang['id']}}>{{lang["name"]}}</option>
+                <option name="langId" value={{lang['id']}}>{{lang["name"]}}</option>
             {% endfor %}
         </select></h4>
         <h4>Comment (optonal): <textarea class="formInput" name="comment"></textarea></h4>
@@ -37,7 +37,7 @@
     </div>
     <div id="displayTable">
             {% for ninja in ninjas %}
-            <a href="/show/{{ninja.id}}"><h4>{{ninja.userName}}</h4></a>
+            <a href="/success/{{ninja.id}}" class="link"><h4>{{ninja.userName}}</h4></a>
             {% endfor %}
         </div>
 </div>

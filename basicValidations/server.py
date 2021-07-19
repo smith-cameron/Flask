@@ -20,52 +20,40 @@ def index():
 
 @app.route('/postData', methods=['POST'])
 def create():
+    # print(request.form)
     if len(request.form['userName']) < 1:
         flash("Name Required")
-    if request.form['location'] == 0:
+    if len(request.form['locId']) < 1:
         flash("Location Required")
-    if request.form['language'] == 0:
+    if len(request.form['langId']) < 1:
         flash("Language Required")
     if request.form['comment']:
         if len(request.form['comment']) < 5 and len(request.form['comment']) > 0:
-            flash("Comment Must Be Over 10 Characters")
+            flash("Comment Must Be Over 5 Characters")
     if not '_flashes' in session.keys():
-        # print(request.form)
         mysql = connectToMySQL('basicValidations')
         query = "INSERT INTO ninjas (UserName, locId, langId, comment, createdAt) VALUES (%(n)s, %(lo)s, %(la)s, %(com)s, NOW());"
         input = {
             "n" : request.form["userName"],
-            "lo" : request.form["location"],
-            "la" : request.form["language"],
+            "lo" : request.form["locId"],
+            "la" : request.form["langId"],
             "com" : request.form["comment"],
         }
         ninja = mysql.query_db(query, input)
+        # print(f"ninjaID: {ninja}")
         return redirect(f'/success/{ninja}')
     return redirect('/')
 
-@app.route('/success/<id>')
+@app.route('/success/<int:id>')
 def resultsRender(id):
     mysql = connectToMySQL('basicValidations')
-    query = ('SELECT * FROM ninjas WHERE id = %(n)s;')
+    query = ('SELECT n.userName, n.comment, lo.name, la.name FROM ninjas n JOIN locations lo ON n.id = lo.id JOIN languages la ON n.id = la.id WHERE n.id = %(n)s;')
     input = {
         "n" : id
     }
     thisNinja = mysql.query_db(query, input)
-    print(thisNinja)
-    mysql = connectToMySQL('basicValidations')
-    query = ('SELECT locId FROM ninjas WHERE id = %(n)s;')
-    thisLoc = mysql.query_db(query, input)
-    print(thisLoc)
-    mysql = connectToMySQL('basicValidations')
-    query = ('SELECT name FROM locations WHERE id = %(n)s;')
-    input = {
-        "n" : thisLoc
-    }
-    locName = mysql.query_db(query, input)
-    print(locName)
-    mysql = connectToMySQL('basicValidations')
-    thisLang = mysql.query_db('SELECT * FROM languages;')
-    return render_template('result.html', ninja = thisNinja)
+    print(f"This Ninja: {thisNinja}")
+    return render_template('show.html', ninja = thisNinja)
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
