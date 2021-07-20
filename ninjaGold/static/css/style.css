@@ -1,6 +1,6 @@
 #wrapper{
     margin: 0px auto;
-    padding:15px 0px;
+    padding:20px 0px;
     width: 1000px;
     height: fit-content;
     border: dashed red 1px;
@@ -11,8 +11,38 @@
 }
 #head{
     text-align: center;
+    text-decoration: underline;
+    color: black;
+}
+.subHead{
+    text-align: center;
 }
 .link{
-    margin: 0px 20px;
-    color:blanchedalmond;
+    color:lightcoral;
+}
+.navLink{
+    margin: 25px;
+    color:lightcoral;
+}
+.displayDiv{
+    display:inline-block;
+    text-align: center;
+    width: 102px;
+}
+.main{
+    margin: 0px auto;
+    width: 425px;
+}
+.button{
+    text-align: center;
+}
+.counter{
+    text-align: center;
+    color:lightcoral;
+}
+.True {
+    color: green;
+}
+.False {
+    color: red;
 }

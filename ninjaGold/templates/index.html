@@ -3,14 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>00Skeleton00</title>
+    <title>Ninja Gold</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
 </head>
 <body>
 <div id="wrapper">
-    <a class="link" href="/logout">Log Out</a>
-    <h1 id="head">Houston, We have liftoff.</h1>
+    <header>
+        <a class="navLink" href="/reset">Reset</a>
+        <h1 id="head">Ninja Gold</h1>
+        <p class="counter" name='count'>Your Gold: {{session['count']}}</p>
+        <p class="counter" name='attempts'>Attempts: {{session['attempts']}}</p>
+    </header>
+    <div class="main">
+        <div class="displayDiv">
+            <h3 class="subHead">Farm</h3>
+            <p>(+10-20 gold)</p>
+            <form action="/farm_process" method="POST">
+                <input type="hidden" name='location' value="farm">
+                <button class="button">Find Gold!</button>
+            </form>
+        </div>
+        <div class="displayDiv">
+            <h3 class="subHead">Cave</h3>
+            <p>(+5-10 gold)</p>
+            <form action="/farm_process" method="POST">
+                <input type="hidden" name='location' value="cave">
+                <button class="button">Find Gold!</button>
+            </form>
+        </div>
+        <div class="displayDiv">
+            <h3 class="subHead">House</h3>
+            <p>(+2-5 gold)</p>
+            <form action="/farm_process" method="POST">
+                <input type="hidden" name='location' value="house">
+                <button class="button">Find Gold!</button>
+            </form>
+        </div>
+        <div class="displayDiv">
+            <h3 class="subHead">Casino</h3>
+            <p>(+/- 0-50 gold)</p>
+            <form action="/farm_process" method="POST">
+                <input type="hidden" name='location' value="casino">
+                <button class="button">Find Gold?</button>
+            </form>
+        </div>
+        <div id="activities">
+            {% for activity in session['log'] %}
+                <p class="{{activity[1]}}">{{activity[0]}}</p>
+            {% endfor %}
+        </div>
+        {% if session['attempts'] >= 15%}
+            {{session['result']}}
+            <a class="navLink" href="/reset">Reset</a>
+        {% endif %}
+    </div>
 </div>
 </body>
 </html>
