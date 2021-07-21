@@ -14,8 +14,7 @@
     text-align: center;
 }
 .link{
-    /* margin: 0px 20px; */
-    color:blanchedalmond;
+    color:lightcoral;
 }
 #formDiv{
     text-align: center;
@@ -27,9 +26,15 @@
     margin-bottom: 20px;
 }
 #displayTable{
+    padding-top: 20px;
     border-top: solid black thin;
     text-align: center;
 }
 #error{
     color:crimson;
+}
+#displayN{
+    margin: 8px 0px;
+    padding:8px 10px;
+    display:inline-block;
 }

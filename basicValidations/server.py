@@ -47,7 +47,8 @@ def create():
 @app.route('/success/<int:id>')
 def resultsRender(id):
     mysql = connectToMySQL('basicValidations')
-    query = ('SELECT n.userName, n.comment, lo.name, la.name FROM ninjas n JOIN locations lo ON n.id = lo.id JOIN languages la ON n.id = la.id WHERE n.id = %(n)s;')
+    query = ('SELECT n.userName, n.comment, lo.locName, la.langName FROM ninjas n JOIN locations lo ON locId = lo.id JOIN languages la ON langId = la.id WHERE n.id = %(n)s;')
+    # query returns nothing for any id > 6
     input = {
         "n" : id
     }
