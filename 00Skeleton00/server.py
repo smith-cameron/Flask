@@ -13,6 +13,11 @@ def index():
     print(users)
     return render_template('index.html')
 
+@app.route('/logout')
+def sessionReset():
+    session.clear()
+    return redirect("/")
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):

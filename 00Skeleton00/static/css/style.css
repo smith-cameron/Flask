@@ -13,6 +13,13 @@
     text-align: center;
 }
 .link{
+    color:coral;
+}
+.navLink{
+    color:coral;
     margin: 0px 20px;
-    color:blanchedalmond;
+    font-size: larger;
+}
+.errors{
+    color: crimson;
 }
