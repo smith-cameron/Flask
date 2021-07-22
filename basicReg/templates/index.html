@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <title>Registration</title>
+</head>
+<body>
+<div id=wrapper>
+<header>
+    <h1 id=head>Registration</h1>
+</header>
+<div>
+    <form id=regForm action="/" method="POST">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for errorM in messages %}
+                    <p id=error>{{errorM}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <h4>First Name: <input type=text name=firstName></h4>
+        <h4>Last Name: <input type=text name=lastName></h4>
+        <h4>Password: <input type=password name=password></h4>
+        <h4>Confirm Password: <input type=password name=passConf></h4>
+        <input id=button type=submit value="Register"/>
+    </form>
+</div>
+
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome {{user.firstName}}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div id=wrapper>
+        <header>
+            <a class=navLink href="/logout">Log Out</a>
+            <h1 id=head>{{user.firstName}} {{user.lastName}}... we have liftoff.</h1>
+            <h2>@ {{user.createdAt}} specifically</h2>
+        </header>
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+#wrapper{
+    margin: 0px auto;
+    padding:15px 0px;
+    width: 1000px;
+    height: fit-content;
+    border: dashed red 1px;
+    font-family:Arial, Helvetica, sans-serif;
+    background: rgb(92,97,176);
+    background: radial-gradient(circle, rgba(92,97,176,1) 0%, rgba(40,46,91,1) 84%);
+    color: blanchedalmond;
+}
+#head{
+    text-align: center;
+    text-decoration: underline;
+}
+.link{
+    color:coral;
+}
+.navLink{
+    color:coral;
+    margin: 0px 20px;
+    font-size: larger;
+}
+#error{
+    color: crimson;
+}
+#regForm{
+    text-align: center;
+}
