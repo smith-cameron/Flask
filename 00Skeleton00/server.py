@@ -1,22 +1,7 @@
-from flask import Flask, render_template, request, redirect, session, flash
-from mysqlDB import connectToMySQL
-from datetime import datetime
+from flask_app import app
+from flask_app.controllers import main
 
-app = Flask(__name__)
-app.secret_key = 'secret_keyy'
-dateFormat = "%m/%d/%Y"
 
-@app.route('/')
-def index():
-    mysql = connectToMySQL('initflask')
-    users = mysql.query_db('SELECT * FROM users;')
-    print(users)
-    return render_template('index.html')
-
-@app.route('/logout')
-def sessionReset():
-    session.clear()
-    return redirect("/")
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')

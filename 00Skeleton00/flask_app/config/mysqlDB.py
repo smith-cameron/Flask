@@ -23,5 +23,5 @@ class MySQLConnection:
                 return False
             finally:
                 self.connection.close()
-def connectToMySQL(db):
+def connect(db):
     return MySQLConnection(db)
