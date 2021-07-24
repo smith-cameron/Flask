@@ -9,7 +9,7 @@
     background: radial-gradient(circle, rgba(92,97,176,1) 0%, rgba(40,46,91,1) 84%);
     color: blanchedalmond;
 }
-#head{
+.head{
     text-align: center;
 }
 .link{
@@ -20,6 +20,29 @@
     margin: 0px 20px;
     font-size: larger;
 }
-.errors{
-    color: crimson;
+#displayTable{
+    display: inline-block;
+    margin-left: 159px;
+    width: 310px;
+    border-collapse: collapse;
+    text-align: center;
+}
+.tableData{
+    padding: 8px 10px;
+    border: thin solid black;
+}
+#inputForm{
+    display: inline-block;
+    margin-left: 159px;
+    /* width: 250px; */
+}
+#rightDiv{
+    display: inline-block;
+    vertical-align: top;
+}
+#ninjasTable{
+    width: 350px;
+    border-collapse: collapse;
+    text-align: center;
+    margin: 0px auto;
 }

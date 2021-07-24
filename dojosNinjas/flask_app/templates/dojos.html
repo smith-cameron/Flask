@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <title>Dojos</title>
+</head>
+<body>
+<div id=wrapper>
+    <header>
+        <a class=navLink href="/ninjas">Add Ninja</a>
+    </header>
+    <div id=inputForm>
+        <h2 class=head>Create Dojo</h2>
+        <form action="/dojos" method="POST">
+            <h4>Name: <input type="text" name="name"></h4>
+            <input type="submit" value="Add Dojo">
+        </form>
+    </div>
+    <div id=rightDiv>
+        <h2 class=head>All Dojos</h2>
+        <table id="displayTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dojo in dojos %}
+                <tr>
+                    <td class=tableData >{{dojo.id}}</td>
+                    <td class=tableData><a class=link href="/dojos/{{dojo.id}}">{{dojo.name}}</a></td>
+                    <td class=tableData>{{dojo.createdAt.strftime(dtf)}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

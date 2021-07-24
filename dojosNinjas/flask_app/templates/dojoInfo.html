@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>A Dojo Info</title>
+</head>
+<body>
+<div id=wrapper>
+    <header>
+        <a class=navLink href="/dojos">Home</a>
+        <a class=navLink href="/ninjas">Add Ninja</a>
+    </header>
+    <div >
+        {% for d in dojo %}
+        <h1 class=head>{{d.name}} Ninjas</h1>
+        {% endfor %}
+    </div>
+    <div>
+        <table id="ninjasTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Joined</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ninja in ninjas %}
+                <tr>
+                    <td class=tableData >{{ninja.id}}</td>
+                    <td class=tableData>{{ninja.firstName}} {{ninja.lastName}}</td>
+                    <td class=tableData>{{ninja.createdAt.strftime(dtf)}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

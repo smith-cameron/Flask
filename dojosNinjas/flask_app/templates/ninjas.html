@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <title>New Ninja</title>
+</head>
+<body>
+<div id=wrapper>
+    <header>
+        <a class=navLink href="/dojos">Home</a>
+    </header>
+    <div id=inputForm>
+        <h2 class=head>New Ninja</h2>
+        <form action="/ninjas" method="POST">
+            <h4>Dojo Attending: <select type="select" name="dojoId">
+                <option disabled selected>Select Dojo</option>
+                {% for dojo in dojos %}
+                <option value={{dojo.id}}>{{dojo.name}}</option>
+                {% endfor %}
+            </select></h4>
+            <h4>First Name: <input type="text" name="firstName"></h4>
+            <h4>Last Name: <input type="text" name="lastName"></h4>
+            <h4>Age: <input type=number min=18 max=120 name="age"></h4>
+            <input type="submit" value="Add Ninja">
+        </form>
+    </div>
+
+</div>
+</body>
+</html>
