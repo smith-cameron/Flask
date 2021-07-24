@@ -15,8 +15,11 @@
 .subHead{
     text-align: center;
 }
-.link{
+.navLink{
     color:lightcoral;
+}
+.link{
+    color: lightcoral;
 }
 #linkNav{
     padding-left: 60px;
