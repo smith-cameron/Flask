@@ -7,8 +7,8 @@ class User:
         self.lastName = data['ln']
         self.email = data['e']
         self.password = data['p']
-        self.created_at = data['created_at']
-        self.updated_at = data['updated_at']
+        self.createdAt = data['createdAt']
+        self.updatedAt = data['updatedAt']
 
     @classmethod
     def getAll(cls):

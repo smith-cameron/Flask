@@ -12,6 +12,36 @@
     <header>
         <h1 id=head>Houston, We have liftoff.</h1>
     </header>
+    <div id="inputForm" >
+        <form action="/users/create" method="POST">
+            <p>First Name: <input type="text" name="firstName"></p>
+            <p>Last Name: <input type="text" name="lastName"></p>
+            <p>Email: <input type="text" name="email"></p>
+            <input type="submit" value="Add User">
+        </form>
+    </div>
+    <table id="displayTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in allUsers %}
+            <tr>
+                <td class="tableData" >{{user.id}}</td>
+                <td class="tableData">{{user.firstName}} {{user.lastName}}</td>
+                <td class="tableData">{{user.email}}</td>
+                <td class="tableData">{{user.createdAt.strftime(dtf)}}</td>
+                <td class="tableData"><a class="link" href="/users/{{user.id}}">Show</a> | <a class="link" href="/users/{{user.id}}/edit">Edit</a> | <a class="link" href="/users/{{user.id}}/delete">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
 </div>
 </body>
 </html>
