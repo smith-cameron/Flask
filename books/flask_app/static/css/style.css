@@ -9,8 +9,10 @@
     background: radial-gradient(circle, rgba(92,97,176,1) 0%, rgba(40,46,91,1) 84%);
     color: blanchedalmond;
 }
-#head{
+.head{
+    display: inline-block;
     text-align: center;
+    vertical-align: top;
 }
 .link{
     color:coral;
@@ -23,18 +25,29 @@
 .errors{
     color: crimson;
 }
+#inputForm{
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    margin-left: 175px;
+}
+
 #displayTable{
-    display:block;
-    margin: 0px auto;
-    width: 750px;
+    display: inline-block;
     border-collapse: collapse;
+    text-align: center;
+    vertical-align: top;
+    margin-left: 175px;
 }
 .tableData{
     padding: 8px 10px;
     border: thin solid black;
 }
-#inputForm{
-    display: block;
-    margin: 0px auto;
-    width: 250px;
+table{
+    display: inline-block
+    vertical-align: top;
+}
+div{
+    display: inline-block;
+    vertical-align: top;
 }

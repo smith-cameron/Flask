@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Books</title>
+</head>
+<body>
+<div id=wrapper>
+    <header>
+        <a class=navLink href="/authors">Authors</a>
+    </header>
+    <div id="inputForm" >
+        <h1 class=head>Add A Book</h1>
+        <form action="/books" method="POST">
+            <h4>Title: <input type="text" name="title"></h4>
+            <h4>Number Of Pages: <input min=200 type="number" name="pageCount"></h4>
+            <input type="submit" value="Add Book">
+        </form>
+    </div>
+    <div id=displayTable>
+        <h1 class=head>All Books</h1>
+        <table >
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <!-- <th># of Pages</th>
+                <th>Created</th>
+                <th>Actions</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td class="tableData" >{{book.id}}</td>
+                <td class="tableData"><a class="link" href="/books/{{book.id}}">{{book.title}}</a></td>
+                <!-- <td class="tableData">{{book.pageCount}}</td>
+                <td class="tableData">{{book.createdAt.strftime(dtf)}}</td>
+                <td class="tableData">Show | <a class="link" href="/books/{{book.id}}/edit">Edit</a> | <a class="link" href="/users/{{book.id}}/delete">Delete</a></td> -->
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

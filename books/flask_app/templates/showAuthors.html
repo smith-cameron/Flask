@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Author Info</title>
+</head>
+<body>
+<div id=wrapper>
+    <header>
+        <a class=navLink href="/authors">Authors</a> | <a class=navLink href="/books">Books</a>
+    </header>
+
+    <div id=displayTable>
+        <h1 class=head>{{author.name}}s Favorite Books</h1>
+        <table >
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th># of Pages</th>
+                <!-- <th>Created</th>
+                <th>Actions</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td class="tableData" >{{book.id}}</td>
+                <td class="tableData"><a class="link" href="/books/{{book.id}}">{{book.title}}</a></td>
+                <td class="tableData">{{book.pageCount}}</td>
+                <!-- <td class="tableData">{{book.createdAt.strftime(dtf)}}</td>
+                <td class="tableData">Show | <a class="link" href="/books/{{book.id}}/edit">Edit</a> | <a class="link" href="/users/{{book.id}}/delete">Delete</a></td> -->
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    <div id="inputForm" >
+        <h1 class=head>Add Authors Favorites</h1>
+        <form action="/authors/add" method="POST">
+            <h4>Title: <select type="text" name="title"></h4>
+            <!-- for loop through books not already favorited -->
+
+            <input type="submit" value="Add">
+        </form>
+    </div>
+</div>
+</body>
+</html>
