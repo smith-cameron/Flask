@@ -19,3 +19,9 @@ class Book:
         query = 'Insert INTO books (title, pageCount, createdAt) VALUES( %(t)s, %(pc)s, NOW());'
         bookId = connect('booksAuthors').query_db(query, data)
         return bookId
+
+    @classmethod
+    def findById(cls, data):
+        query = 'SELECT * FROM books WHERE id = %(i)s;'
+        thisBook = connect('booksAuthors').query_db(query, data)
+        return thisBook

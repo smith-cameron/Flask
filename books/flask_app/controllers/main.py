@@ -41,15 +41,21 @@ def createAuthor():
 
 @app.route('/authors/<int:id>')
 def authorsShow(id):
-    allAuthors = Author.getAll()
-    print(allAuthors)
-    return render_template('ShowAuthors.html', authors = allAuthors, dtf = dateFormat)
+    data = {
+        "i" : id
+    }
+    thisAuthor = Author.findById(data)
+    print(thisAuthor)
+    return render_template('ShowAuthors.html', author = thisAuthor, dtf = dateFormat)
 
 @app.route('/books/<int:id>')
 def booksShow(id):
-    allBooks = Book.getAll()
-    print(allBooks)
-    return render_template('showBooks.html', books = allBooks, dtf = dateFormat)
+    data = {
+        "i" : id
+    }
+    thisBook = Book.findById()
+    print(thisBook)
+    return render_template('showBooks.html', book = thisBook, dtf = dateFormat)
 
 @app.route('/logout')
 def sessionReset():

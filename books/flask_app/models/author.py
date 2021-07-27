@@ -18,3 +18,9 @@ class Author:
         query = 'Insert INTO authors (name, createdAt) VALUES( %(n)s, NOW());'
         authId = connect('booksAuthors').query_db(query, data)
         return authId
+
+    @classmethod
+    def findById(cls, data):
+        query = 'SELECT * FROM authors WHERE id = %(i)s;'
+        thisAuth = connect('booksAuthors').query_db(query, data)
+        return thisAuth
