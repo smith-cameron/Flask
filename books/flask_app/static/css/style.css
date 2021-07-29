@@ -29,12 +29,11 @@
     display: inline-block;
     text-align: center;
     vertical-align: top;
-    margin-left: 175px;
+    margin-left: 100px;
 }
 
-#displayTable{
+#displayDiv{
     display: inline-block;
-    border-collapse: collapse;
     text-align: center;
     vertical-align: top;
     margin-left: 175px;
@@ -44,10 +43,11 @@
     border: thin solid black;
 }
 table{
-    display: inline-block
+    display: table;
+    border-collapse: collapse;
     vertical-align: top;
 }
-div{
+/* div{
     display: inline-block;
     vertical-align: top;
-}
+} */

@@ -8,17 +8,16 @@
 </head>
 <body>
 <div id=wrapper>
+    {% for a in author %}
     <header>
         <a class=navLink href="/authors">Authors</a> | <a class=navLink href="/books">Books</a>
     </header>
-    <div id=displayTable>
-        <h1 class=head>{{author.name}}s Favorite Books</h1>
+    <div id=displayDiv>
+        <h1 class=head>{{a.name}}'s Favorite Books</h1>
         <table >
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Title</th>
-                <th># of Pages</th>
                 <!-- <th>Created</th>
                 <th>Actions</th> -->
             </tr>
@@ -26,9 +25,7 @@
         <tbody>
             {% for book in books %}
             <tr>
-                <td class="tableData" >{{book.id}}</td>
                 <td class="tableData"><a class="link" href="/books/{{book.id}}">{{book.title}}</a></td>
-                <td class="tableData">{{book.pageCount}}</td>
                 <!-- <td class="tableData">{{book.createdAt.strftime(dtf)}}</td>
                 <td class="tableData">Show | <a class="link" href="/books/{{book.id}}/edit">Edit</a> | <a class="link" href="/users/{{book.id}}/delete">Delete</a></td> -->
             </tr>
@@ -45,6 +42,7 @@
             <input type="submit" value="Add">
         </form>
     </div>
+    {% endfor %}
 </div>
 </body>
 </html>

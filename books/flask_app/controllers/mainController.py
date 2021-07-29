@@ -53,9 +53,11 @@ def booksShow(id):
     data = {
         "i" : id
     }
-    thisBook = Book.findById()
+    thisBook = Book.findById(data)
+    notFav = Book.getNotFav(data)
     print(thisBook)
-    return render_template('showBooks.html', book = thisBook, dtf = dateFormat)
+    print(notFav)
+    return render_template('showBooks.html', book = thisBook, dtf = dateFormat, authorsOut = notFav)
 
 @app.route('/logout')
 def sessionReset():

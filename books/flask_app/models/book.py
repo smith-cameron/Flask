@@ -25,3 +25,15 @@ class Book:
         query = 'SELECT * FROM books WHERE id = %(i)s;'
         thisBook = connect('booksAuthors').query_db(query, data)
         return thisBook
+
+    @classmethod
+    def getFav(cls, data):
+        query = 'SELECT * FROM favorites WHERE book_id = %(i)s;'
+        bookFavs = connect('booksAuthors').query_db(query, data)
+        return bookFavs
+
+    @classmethod
+    def getNotFav(cls, data):
+        query = 'SELECT n.userName, n.comment, lo.locName, la.langName FROM books b LeftJOIN locations lo ON locId = lo.id JOIN languages la ON langId = la.id WHERE n.id = %(n)s;'
+        notFavs = connect('booksAuthors').query_db(query, data)
+        return notFavs
