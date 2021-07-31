@@ -17,13 +17,11 @@
 }
 .navLink{
     color:lightcoral;
+    padding-left: 60px;
+    margin-top: 20px;
 }
 .link{
     color: lightcoral;
-}
-#linkNav{
-    padding-left: 60px;
-    margin-top: 20px;
 }
 .navLink{
     margin: 10px 25px;

@@ -40,7 +40,6 @@ def create():
             "com" : request.form["comment"],
         }
         ninja = mysql.query_db(query, input)
-        # print(f"ninjaID: {ninja}")
         return redirect(f'/success/{ninja}')
     return redirect('/')
 
@@ -48,7 +47,6 @@ def create():
 def resultsRender(id):
     mysql = connectToMySQL('basicValidations')
     query = ('SELECT n.userName, n.comment, lo.locName, la.langName FROM ninjas n JOIN locations lo ON locId = lo.id JOIN languages la ON langId = la.id WHERE n.id = %(n)s;')
-    # query returns nothing for any id > 6
     input = {
         "n" : id
     }
