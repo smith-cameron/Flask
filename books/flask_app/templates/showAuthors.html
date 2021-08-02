@@ -18,16 +18,15 @@
         <thead>
             <tr>
                 <th>Title</th>
-                <!-- <th>Created</th>
-                <th>Actions</th> -->
+                <!-- <th>Actions</th> -->
             </tr>
         </thead>
         <tbody>
             {% for book in favoriteBooks %}
             <tr>
-                <td class="tableData"><a class="link" href="/books/{{book.id}}">{{book.title}}</a></td>
-                <!-- <td class="tableData">{{book.createdAt.strftime(dtf)}}</td>
-                <td class="tableData">Show | <a class="link" href="/books/{{book.id}}/edit">Edit</a> | <a class="link" href="/users/{{book.id}}/delete">Delete</a></td> -->
+                <td class="tableData">{{book}}</td>
+
+                <!-- <td <a class="link" href="/books/{{book.id}}/edit">Edit</a> | <a class="link" href="/users/{{book.id}}/delete">Delete</a></td> -->
             </tr>
             {% endfor %}
         </tbody>

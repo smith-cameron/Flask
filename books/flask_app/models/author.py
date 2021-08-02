@@ -30,3 +30,15 @@ class Author:
         query = 'Insert INTO favorites (book_id, author_id) VALUES( %(bi)s, %(ai)s);'
         newFav = connect('booksAuthors').query_db(query, data)
         return newFav
+
+    @classmethod
+    def getFav(cls, data):
+        # Need to update query to return whole opjects
+        query = 'SELECT b.title FROM favorites f JOIN books b ON book_id = b.id WHERE author_id = %(i)s GROUP BY title;'
+        authorFavsFromDB = connect('booksAuthors').query_db(query, data)
+        favs = []
+        for i in authorFavsFromDB:
+            for val in i:
+                favs.append(i[val])
+        # print(favs)
+        return favs

@@ -29,6 +29,7 @@ class Book:
 
     @classmethod
     def getFav(cls, data):
+        # Need to update query to return whole opjects
         query = 'SELECT a.name FROM favorites f JOIN authors a ON author_id = a.id WHERE book_id = %(i)s GROUP BY name;'
         bookFavsFromDB = connect('booksAuthors').query_db(query, data)
         favs = []

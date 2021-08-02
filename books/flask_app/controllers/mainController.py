@@ -46,8 +46,11 @@ def authorsShow(id):
     }
     thisAuthor = Author.findById(data)
     allB = Book.getAll()
+    authorFavs = Author.getFav(data)
+    # Method should have all books not favorited by this author yet
     print(thisAuthor)
-    return render_template('ShowAuthors.html', author = thisAuthor, dtf = dateFormat, books = allB)
+    print(authorFavs)
+    return render_template('ShowAuthors.html', author = thisAuthor, dtf = dateFormat, books = allB, favoriteBooks = authorFavs)
 
 @app.route('/books/<int:id>')
 def booksShow(id):
@@ -55,11 +58,12 @@ def booksShow(id):
         "i" : id
     }
     thisBook = Book.findById(data)
+    # Method should have all authors who have not liked this book yet
     # notFav = Book.getNotFav(data)
-    bookFavsIds = Book.getFav(data)
+    bookLikers = Book.getFav(data)
     allA = Author.getAll()
     print(thisBook)
-    return render_template('showBooks.html', book = thisBook, dtf = dateFormat, authors = allA, favoritedBy = bookFavsIds)
+    return render_template('showBooks.html', book = thisBook, dtf = dateFormat, authors = allA, favoritedBy = bookLikers)
 
 @app.route('/books/<int:id>/addAuthor', methods = ['POST'])
 def addAuthor2Book(id):
