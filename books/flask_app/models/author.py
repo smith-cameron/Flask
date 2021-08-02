@@ -24,3 +24,9 @@ class Author:
         query = 'SELECT * FROM authors WHERE id = %(i)s;'
         thisAuth = connect('booksAuthors').query_db(query, data)
         return thisAuth
+
+    @classmethod
+    def saveFavs(cls, data):
+        query = 'Insert INTO favorites (book_id, author_id) VALUES( %(bi)s, %(ai)s);'
+        newFav = connect('booksAuthors').query_db(query, data)
+        return newFav

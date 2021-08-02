@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for book in books %}
+            {% for book in favoriteBooks %}
             <tr>
                 <td class="tableData"><a class="link" href="/books/{{book.id}}">{{book.title}}</a></td>
                 <!-- <td class="tableData">{{book.createdAt.strftime(dtf)}}</td>
@@ -34,11 +34,13 @@
         </table>
     </div>
     <div id="inputForm" >
-        <h1 class=head>Add Authors Favorites</h1>
-        <form action="/authors/add" method="POST">
-            <h4>Title: <select type="text" name="title"></h4>
+        <h1 class=head>Add To Favorites</h1>
+        <form action="/authors/{{a.id}}/addBook" method="POST">
+            <h4>Title: <select type="text" name="bookId"></h4>
             <!-- for loop through books not already favorited -->
-
+            {% for b in books %}
+            <option value={{b.id}}>{{b.title}}</option>
+            {% endfor %}
             <input type="submit" value="Add">
         </form>
     </div>

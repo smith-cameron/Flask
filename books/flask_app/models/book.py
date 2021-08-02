@@ -1,4 +1,5 @@
 from flask_app.config.mysqlDB import connect
+from flask_app.models.author import Author
 
 class Book:
     def __init__(self, data):
@@ -28,12 +29,23 @@ class Book:
 
     @classmethod
     def getFav(cls, data):
-        query = 'SELECT * FROM favorites WHERE book_id = %(i)s;'
-        bookFavs = connect('booksAuthors').query_db(query, data)
-        return bookFavs
+        query = 'SELECT a.name FROM favorites f JOIN authors a ON author_id = a.id WHERE book_id = %(i)s GROUP BY name;'
+        bookFavsFromDB = connect('booksAuthors').query_db(query, data)
+        favs = []
+        for i in bookFavsFromDB:
+            print(i)
+            for val in i:
+                favs.append(i[val])
+        return favs
+
+    # @classmethod
+    # def getNotFav(cls, data):
+    #     query = 'SELECT a.name FROM favorites f RIGHT JOIN authors a ON author_id = a.id WHERE book_id != %(i)s;'
+    #     notFavs = connect('booksAuthors').query_db(query, data)
+    #     return notFavs
 
     @classmethod
-    def getNotFav(cls, data):
-        query = 'SELECT n.userName, n.comment, lo.locName, la.langName FROM books b LeftJOIN locations lo ON locId = lo.id JOIN languages la ON langId = la.id WHERE n.id = %(n)s;'
-        notFavs = connect('booksAuthors').query_db(query, data)
-        return notFavs
+    def saveFavs(cls, data):
+        query = 'Insert INTO favorites (book_id, author_id) VALUES( %(bi)s, %(ai)s);'
+        newFav = connect('booksAuthors').query_db(query, data)
+        return newFav

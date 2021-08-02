@@ -35,10 +35,9 @@
     </div>
     <div id="inputForm" >
         <h1 class=head>Add Books's Favorites</h1>
-        <form action="/books/add" method="POST">
-            <h4>Author: <select type="text" name="title"></h4>
-            <!-- for loop through authors not already favorited -->
-            {% for a in authorsOut%}
+        <form action="/books/{{b.id}}/addAuthor" method="POST">
+            <h4>Author: <select type="text" name="authId"></h4>
+            {% for a in authors %}
             <option value={{a.id}}>{{a.name}}</option>
             {% endfor %}
             <input type="submit" value="Add">
@@ -48,7 +47,7 @@
         <h2>Favorited By:</h2>
         <ul>
             {% for fav in favoritedBy %}
-            <li>{{fav.name}}</li>
+            <li>{{fav}}</li>
             {% endfor %}
         </ul>
     </div>
