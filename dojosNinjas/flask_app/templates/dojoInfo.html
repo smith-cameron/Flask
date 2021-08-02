@@ -23,6 +23,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
+                    <th>Age</th>
                     <th>Joined</th>
                 </tr>
             </thead>
@@ -31,6 +32,7 @@
                 <tr>
                     <td class=tableData >{{ninja.id}}</td>
                     <td class=tableData>{{ninja.firstName}} {{ninja.lastName}}</td>
+                    <td class=tableData>{{ninja.age}}</td>
                     <td class=tableData>{{ninja.createdAt.strftime(dtf)}}</td>
                 </tr>
                 {% endfor %}
