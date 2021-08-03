@@ -13,7 +13,7 @@ class User:
     @classmethod
     def getAll(cls):
         query = 'SELECT * FROM users;'
-        allUsers = connect('initflask').query_db(query)
+        allUsers = connect('dataBase').query_db(query)
         users = []
         for u in allUsers:
             users.append(cls(u))
@@ -21,6 +21,12 @@ class User:
 
     @classmethod
     def save(cls, data):
-        query = 'Insert INTO burgers (firstName, lastName, email, password, created_at) VALUES(%(fn)s, %(ln)s, %(e)s, %(p)s, NOW());'
-        user_id = connect('initflask').query_db(query, data)
+        query = 'Insert INTO users (firstName, lastName, email, password, created_at) VALUES(%(fn)s, %(ln)s, %(e)s, %(p)s, NOW());'
+        user_id = connect('dataBase').query_db(query, data)
         return user_id
+
+    @classmethod
+    def findById(cls, data):
+        query = 'SELECT * FROM users WHERE id = %(i)s;'
+        thisUser = connect('dataBase').query_db(query, data)
+        return thisUser
