@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <title>Friends</title>
+</head>
+<body>
+<div id=wrapper>
+    <header>
+        <h1 id=head>Friends Of Friends</h1>
+    </header>
+    <table id="displayTable">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Friend</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in allFriends %}
+            <tr>
+                <td class="tableData">{{user.userId}} {{user.lastName}}</td>
+                <td class="tableData">{{user.firstName}} {{user.friendId}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    <div class="inputForm" >
+        <h2 class=subHead>Add User</h2>
+        <form action="/create" method="POST">
+            <h4>First Name: <input type="text" name="firstName"></h4>
+            <h4>Last Name: <input type="text" name="lastName"></h4>
+            <button type="submit">Add User</button>
+        </form>
+    </div>
+    <div class="inputForm" >
+        <h2 class=subHead>Create Friendship</h2>
+        <form action="/" method="POST">
+            <h4>User: <select type="text" name="userId"></h4>
+                <option selected disabled>--Find Yourself--</option>
+                for loop of all users
+                {% for u in users %}
+                <option value={{u.id}}>{{u.firstName}} {{u.lastName}}</option>
+                {% endfor %}
+            </select>
+            <h4>Friend: <select type="text" name="friendId"></h4>
+                <option selected disabled>--Select A Friend--</option>
+                <!-- for loop of users not already friended -->
+                {% for u in users %}
+                <option value={{u.id}}>{{u.firstName}} {{u.lastName}}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Create</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
