@@ -5,6 +5,13 @@ from flask_app.models.user import User
 from datetime import datetime
 dateFormat = "%m/%d/%Y"
 
+@app.route('/register', methods=['POST'])
+def register():
+    if not User.validate_user(request.form):
+        return redirect('/')
+    # ... do other things
+    return redirect('/dashboard')
+
 @app.route('/')
 def index():
     allUsers = User.getAll()
@@ -12,7 +19,7 @@ def index():
     return render_template('index.html', users = allUsers)
 
 @app.route('/create',methods=['POST'])
-def create_burger():
+def createUser():
 	data = {
             "fn" : request.form['firstName'],
             "ln" : request.form['lastName'],

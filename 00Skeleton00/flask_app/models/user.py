@@ -1,4 +1,7 @@
 from flask_app.config.mysqlDB import connect
+from flask import flash
+import re
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 class User:
     def __init__(self, data):
@@ -9,6 +12,14 @@ class User:
         self.password = data['p']
         self.createdAt = data['createdAt']
         self.updatedAt = data['updatedAt']
+
+    @staticmethod
+    def validate_user( user ):
+        is_valid = True
+        if not EMAIL_REGEX.match(user['email']):
+            flash("Invalid email address!")
+            is_valid = False
+        return is_valid
 
     @classmethod
     def getAll(cls):
@@ -21,7 +32,7 @@ class User:
 
     @classmethod
     def save(cls, data):
-        query = 'Insert INTO users (firstName, lastName, email, password, created_at) VALUES(%(fn)s, %(ln)s, %(e)s, %(p)s, NOW());'
+        query = 'Insert INTO users (firstName, lastName, email, password, createdAt) VALUES(%(fn)s, %(ln)s, %(e)s, %(p)s, NOW());'
         user_id = connect('dataBase').query_db(query, data)
         return user_id
 
