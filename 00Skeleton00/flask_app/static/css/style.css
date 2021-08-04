@@ -12,6 +12,10 @@
 #head{
     text-align: center;
 }
+.subHead{
+    text-align: center;
+    text-decoration: underline;
+}
 .link{
     color:coral;
 }
@@ -20,21 +24,45 @@
     margin: 0px 20px;
     font-size: larger;
 }
-.errors{
+.loginError{
     color: crimson;
+    text-align: center;
+}
+.regError{
+    color: crimson;
+    text-align: center;
 }
 #displayTable{
-    display:block;
+    display: block;
     margin: 0px auto;
     width: 750px;
     border-collapse: collapse;
 }
 .tableData{
     padding: 8px 10px;
-    border: thin solid black;
 }
 #inputForm{
     display: block;
     margin: 0px auto;
     width: 250px;
+}
+table{
+    margin: 0px auto;
+}
+header{
+    border-bottom: thin solid black;
+}
+#loginForm{
+    display: inline-block;
+    width: fit-content;
+    text-align: right;
+    vertical-align: top;
+    margin: 20px 0px 0px 0px;
+}
+#regForm{
+    display: inline-block;
+    width: fit-content;
+    text-align: right;
+    vertical-align: top;
+    margin: 20px 150px 35px 150px;
 }
