@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <title>Email Validations</title>
+</head>
+<body>
+<div id=wrapper>
+    <header>
+        <a class=navLink href="/">Home</a>
+        <h1 id=head>Houston, We have liftoff.</h1>
+    </header>
+    <!-- <Green backG div> with "The email address you entered ({{emailEntered}}) is a VALID email address! Thank You!" -->
+        <div id=welcome>
+            {% for u in user %}
+            <h4>The email address you entered ({{u.email}}) is a VALID email address! Thank You!</h4>
+            {% endfor %}
+        </div>
+    <div id="displayTable">
+        <h2 class=subHead>Email Addresses Entered:</h2>
+        <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Created</th>
+                <!-- <th>Actions</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in allUsers %}
+            <tr>
+                <td class="tableData" ><a class="link" href="/users/{{user.id}}"></a>{{user.id}}</a></td>
+                <td class="tableData">{{user.email}}</td>
+                <td class="tableData">{{user.createdAt.strftime(dtf)}}</td>
+                <!-- <td class="tableData"><a class="link" href="/users/{{user.id}}/edit">Edit</a> | <a class="link" href="/users/{{user.id}}/delete">Delete</a></td> -->
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

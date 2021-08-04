@@ -1,0 +1,58 @@
+#wrapper{
+    margin: 0px auto;
+    padding:15px 0px;
+    width: 1000px;
+    height: fit-content;
+    border: dashed red 1px;
+    font-family:Arial, Helvetica, sans-serif;
+    background: rgb(92,97,176);
+    background: radial-gradient(circle, rgba(92,97,176,1) 0%, rgba(40,46,91,1) 84%);
+    color: blanchedalmond;
+}
+#head{
+    text-align: center;
+}
+.subHead{
+    text-align: center;
+    text-decoration: underline;
+}
+.link{
+    color:coral;
+}
+.navLink{
+    color:coral;
+    margin: 0px 20px;
+    font-size: larger;
+}
+#error{
+    color: crimson;
+}
+#displayTable{
+    display:block;
+    margin: 0px auto;
+    width: 750px;
+    border-collapse: collapse;
+    text-align: center;
+}
+.tableData{
+    padding: 8px 10px;
+}
+#inputForm{
+    display: block;
+    margin: 0px auto;
+    width: 250px;
+}
+#welcome{
+    background-color: palegreen;
+    color: black;
+    text-align: center;
+    width: fit-content;
+    margin: 0px auto;
+    padding: 10px;
+}
+h4{
+    margin: 0px;
+}
+table{
+    margin: 0px auto;
+}
