@@ -11,14 +11,15 @@ def index():
 
 @app.route('/',methods=['POST'])
 def createUser():
-    if not User.validateUser(request.form):
-        return redirect('/')
-    data = {
+    if User.validateUser(request.form):
+        data = {
         "e" : request.form['email']
-    }
-    userId = User.save(data)
-    print(userId)
-    return redirect(f'/home/{userId}')
+        }
+        userId = User.save(data)
+        print(userId)
+        return redirect(f'/home/{userId}')
+    return redirect('/')
+
 
 @app.route('/home/<int:id>')
 def landing(id):
