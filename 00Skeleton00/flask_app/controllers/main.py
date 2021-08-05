@@ -30,14 +30,14 @@ def register():
 @app.route('/login', methods=['POST'])
 def login():
     data = { "email" : request.form["email"] }
-    user_in_db = User.getByEmail(data)
-    if not user_in_db:
+    user = User.getByEmail(data)
+    if not user:
         flash("Invalid Email/Password Input", 'loginError')
         return redirect("/")
-    if not bcrypt.check_password_hash(user_in_db.password, request.form['password']):
+    if not bcrypt.check_password_hash(user.password, request.form['password']):
         flash("Invalid Email/Password Input", 'loginError')
         return redirect('/')
-    session['userId'] = user_in_db.id
+    session['userId'] = user.id
     return redirect("/home")
 
 @app.route('/home')
@@ -55,13 +55,17 @@ def dashboard():
 
 @app.route('/user/<int:id>/delete')
 def deleteUser(id):
-    data = {
-            "i" : id
-        }
-    User.deleteById(data)
-    return redirect("/home")
+    if 'userId' in session:
+        data = {
+                "i" : id
+            }
+        User.deleteById(data)
+        return redirect("/home")
+    return redirect('/')
 
 @app.route('/logout')
 def sessionReset():
-    session.clear()
-    return redirect("/")
+    if 'userId' in session:
+        session.clear()
+        return redirect("/")
+    return redirect('/')
