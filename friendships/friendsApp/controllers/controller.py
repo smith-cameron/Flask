@@ -31,7 +31,7 @@ def createFriendship():
             "ui" : request.form['userId'],
             "fi" : request.form['friendId']
     }
-    print(User.befriend(data))
+    print(Friendship.save(data))
     return redirect('/')
 
 

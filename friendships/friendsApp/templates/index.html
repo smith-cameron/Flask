@@ -12,7 +12,8 @@
     <header>
         <h1 id=head>Friends Of Friends</h1>
     </header>
-    <table id="displayTable">
+    <div id="displayTable">
+        <table >
         <thead>
             <tr>
                 <th>User</th>
@@ -22,12 +23,13 @@
         <tbody>
             {% for user in allFriends %}
             <tr>
-                <td class="tableData">{{user.userId}} {{user.lastName}}</td>
-                <td class="tableData">{{user.firstName}} {{user.friendId}}</td>
+                <td class="tableData">{{user.uFirstName}} {{user.uLastName}}</td>
+                <td class="tableData">{{user.fFirstName}} {{user.fLastName}}</td>
             </tr>
             {% endfor %}
         </tbody>
         </table>
+    </div>
     <div class="inputForm" >
         <h2 class=subHead>Add User</h2>
         <form action="/create" method="POST">
@@ -48,7 +50,6 @@
             </select>
             <h4>Friend: <select type="text" name="friendId"></h4>
                 <option selected disabled>--Select A Friend--</option>
-                <!-- for loop of users not already friended -->
                 {% for u in users %}
                 <option value={{u.id}}>{{u.firstName}} {{u.lastName}}</option>
                 {% endfor %}

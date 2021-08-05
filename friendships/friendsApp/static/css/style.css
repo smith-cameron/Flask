@@ -11,6 +11,7 @@
 }
 #head{
     text-align: center;
+    color:coral;
 }
 .link{
     color:coral;
@@ -24,17 +25,16 @@
     color: crimson;
 }
 #displayTable{
-    display:block;
-    margin: 0px auto;
-    width: 750px;
+    display: inline-block;
+    margin: 10px 20px 0px 40px;
     border-collapse: collapse;
 }
 .tableData{
     padding: 8px 10px;
-    border: thin solid black;
 }
 .inputForm{
-    display: block;
-    margin: 0px auto;
-    width: 250px;
+    display: inline-block;
+    vertical-align: top;
+    border-left: thin solid black;
+    padding: 100px 20px;
 }

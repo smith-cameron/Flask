@@ -10,12 +10,9 @@ class Friendship:
 
     @classmethod
     def getAll(cls):
-        query = 'SELECT * FROM friendships;'
+        query = 'SELECT u.firstName AS "uFirstName", u.lastName AS "uLastName",u2.firstName AS "fFirstName", u2.lastName AS "fLastName" FROM friendships f JOIN users u ON userId = u.id JOIN users u2 ON friendId = u2.id;'
         allfriends = connect('friends').query_db(query)
-        friends = []
-        for u in allfriends:
-            friends.append(cls(u))
-        return friends
+        return allfriends
 
     @classmethod
     def save(cls, data):
