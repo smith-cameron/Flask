@@ -47,7 +47,8 @@ def authorsShow(id):
     thisAuthor = Author.findById(data)
     allB = Book.getAll()
     authorFavs = Author.getFav(data)
-    # Method should have all books not favorited by this author yet
+    # books not favorited by this author yet
+    # notFav = Author.getNotFav(data)
     print(thisAuthor)
     print(authorFavs)
     return render_template('ShowAuthors.html', author = thisAuthor, dtf = dateFormat, books = allB, favoriteBooks = authorFavs)
@@ -58,11 +59,12 @@ def booksShow(id):
         "i" : id
     }
     thisBook = Book.findById(data)
-    # Method should have all authors who have not liked this book yet
-    # notFav = Book.getNotFav(data)
+    # authors who have not liked this book yet
+    notFav = Book.getNotFav(data)
+    print(f"notFav: {notFav}")
     bookLikers = Book.getFav(data)
+    print(bookLikers)
     allA = Author.getAll()
-    print(thisBook)
     return render_template('showBooks.html', book = thisBook, dtf = dateFormat, authors = allA, favoritedBy = bookLikers)
 
 @app.route('/books/<int:id>/addAuthor', methods = ['POST'])
@@ -71,7 +73,7 @@ def addAuthor2Book(id):
         "ai" : request.form['authId'],
         "bi" : id
     }
-    print(Book.saveFavs(data))
+    # print(Book.saveFavs(data))
     return redirect(f'/books/{id}')
 
 @app.route('/authors/<int:id>/addBook', methods = ['POST'])
@@ -80,10 +82,5 @@ def addBook2Author(id):
         "ai" : id,
         "bi" : request.form['bookId']
     }
-    print(Author.saveFavs(data))
+    # print(Author.saveFavs(data))
     return redirect(f'/authors/{id}')
-
-@app.route('/logout')
-def sessionReset():
-    session.clear()
-    return redirect("/")

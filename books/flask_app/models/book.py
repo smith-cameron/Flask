@@ -28,25 +28,19 @@ class Book:
         return thisBook
 
     @classmethod
-    def getFav(cls, data):
-        # Need to update query to return whole opjects
-        query = 'SELECT a.name FROM favorites f JOIN authors a ON author_id = a.id WHERE book_id = %(i)s GROUP BY name;'
-        bookFavsFromDB = connect('booksAuthors').query_db(query, data)
-        favs = []
-        for i in bookFavsFromDB:
-            print(i)
-            for val in i:
-                favs.append(i[val])
-        return favs
-
-    # @classmethod
-    # def getNotFav(cls, data):
-    #     query = 'SELECT a.name FROM favorites f RIGHT JOIN authors a ON author_id = a.id WHERE book_id != %(i)s;'
-    #     notFavs = connect('booksAuthors').query_db(query, data)
-    #     return notFavs
-
-    @classmethod
     def saveFavs(cls, data):
         query = 'Insert INTO favorites (book_id, author_id) VALUES( %(bi)s, %(ai)s);'
         newFav = connect('booksAuthors').query_db(query, data)
         return newFav
+
+    @classmethod
+    def getFav(cls, data):
+        query = 'SELECT * FROM favorites f JOIN authors a ON author_id = a.id WHERE book_id = %(i)s;'
+        bookFavsFromDB = connect('booksAuthors').query_db(query, data)
+        return bookFavsFromDB
+
+    @classmethod
+    def getNotFav(cls, data):
+        query = 'SELECT a.name FROM favorites f JOIN authors a ON author_id = a.id WHERE book_id != %(i)s GROUP BY a.name;'
+        notFavs = connect('booksAuthors').query_db(query, data)
+        return notFavs
