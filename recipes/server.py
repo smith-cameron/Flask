@@ -1,5 +1,5 @@
-from flask_app import app
-from flask_app.controllers import main
+from recipeApp import app
+from recipeApp.controllers import main, loginReg
 
 
 

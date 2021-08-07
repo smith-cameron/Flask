@@ -55,7 +55,7 @@ class User:
     @classmethod
     def getByEmail(cls,data):
         query = "SELECT * FROM users WHERE email = %(email)s;"
-        userEmail = connect("recipes").query_db(query,data)
+        userEmail = connect("flaskRecipes").query_db(query,data)
         if len(userEmail) < 1:
             return False
         return cls(userEmail[0])
@@ -63,22 +63,22 @@ class User:
     @classmethod
     def getAll(cls):
         query = 'SELECT * FROM users;'
-        allUsers = connect('recipes').query_db(query)
+        allUsers = connect('flaskRecipes').query_db(query)
         return allUsers
 
     @classmethod
     def save(cls, data):
         query = 'Insert INTO users (firstName, lastName, email, password, createdAt) VALUES(%(fn)s, %(ln)s, %(e)s, %(p)s, NOW());'
-        user_id = connect('recipes').query_db(query, data)
+        user_id = connect('flaskRecipes').query_db(query, data)
         return user_id
 
     @classmethod
     def findById(cls, data):
         query = 'SELECT * FROM users WHERE id = %(i)s;'
-        thisUser = connect('recipes').query_db(query, data)
+        thisUser = connect('flaskRecipes').query_db(query, data)
         return cls(thisUser[0])
 
     @classmethod
     def deleteById(cls, data):
         query = 'DELETE FROM users WHERE id = %(i)s;'
-        thisUser = connect('recipes').query_db(query, data)
+        thisUser = connect('flaskRecipes').query_db(query, data)
