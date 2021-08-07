@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Wall</title>
+</head>
+<body>
+<div id=wrapper>
+    <header>
+        <h1 id=head>Coding Dojo Wall</h1>
+        <h2 id=navWelcome>Welcome, {{user.firstName}}!</h2>
+        <a class=navLink href="/logout">Log Out</a>
+    </header>
+    <div id=displayMessage>
+        <h3 class=subHead>{{recieved}} Message(s) for You</h3>
+        {% for message in myMessages %}
+            <p class=messageLabel>{{message.firstName}} said:</p>
+            <ul id=list>
+                <li class=listItem>{{message.content}}</li>
+            </ul>
+            <a class=link href="/delete/{{message.id}}">Delete</a>
+        {% endfor %}
+    </div>
+    <div id=messageForm>
+        <h3 class=subHead>Send Messages</h3>
+        <p id=subSubHead>You have {{sent}} sent messages.</p>
+        <form action="/send" method="POST">
+            <p class=formLabel>Recipient: <select name="recipientId"></p>
+                {% for recipient in users %}
+                <option value="{{recipient.id}}">{{recipient.firstName}} {{recipient.lastName}}</option>
+                {% endfor %}
+            </select>
+            <p class=formLabel ><input id=contentInput type="text" name="content"></p>
+            <input id=submitButton type="submit" value="Send">
+        </form>
+    </div>
+</div>
+</body>
+</html>

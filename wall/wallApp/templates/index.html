@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Wall</title>
+</head>
+<body>
+<div id=wrapper>
+    <div id=regForm >
+        <h2 class=subHead>Register</h2>
+        <form action="/register" method="POST">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        {% if category == "regError" %}
+                            <p class=error>{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <p>First Name: <input type="text" name="firstName"></p>
+            <p>Last Name: <input type="text" name="lastName"></p>
+            <p>Email: <input type="text" name="email"></p>
+            <p>Password: <input type="password" name="password"></p>
+            <div id=pass>
+                <ul>
+                    <li class=listMessage>Password requires at leased</li>
+                    <li class=listMessage>8 characters containing:</li>
+                    <li class=passListItem>One Uppercase Letter</li>
+                    <li class=passListItem>One Lowercase Letter</li>
+                    <li class=passListItem>One Symbol ($@#%!&*)</li>
+                    <li class=passListItem>and One Number</li>
+                    <ul>
+                    </ul>
+                </ul>
+            </div>
+            <p>Confirm Password: <input type="password" name="passConf"></p>
+            <input type="submit" value="Register">
+        </form>
+
+    </div>
+    <div id=loginForm >
+        <h2 class=subHead>Login</h2>
+        <form action="/login" method="POST">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        {% if category == "loginError" %}
+                            <p class=error>{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <p>Email: <input type="text" name="email"></p>
+            <p>Password: <input type="password" name="password"></p>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,113 @@
+/* ------- ALL ------- */
+#wrapper{
+    margin: 0px auto;
+    padding:15px 0px;
+    width: 1000px;
+    height: fit-content;
+    border: dashed red 1px;
+    font-family:Arial, Helvetica, sans-serif;
+    background: rgb(92,97,176);
+    background: radial-gradient(circle, rgba(92,97,176,1) 0%, rgba(40,46,91,1) 84%);
+    color: blanchedalmond;
+}
+.subHead{
+    text-align: center;
+    text-decoration: underline;
+    color:coral;
+}
+li{
+    list-style-type: none;
+    vertical-align: top;
+}
+/* ------- index.html ------- */
+#regForm{
+    display: inline-block;
+    width: fit-content;
+    text-align: right;
+    vertical-align: top;
+    margin: 20px 150px 35px 150px;
+}
+.error{
+    color: crimson;
+    text-align: center;
+}
+#loginForm{
+    display: inline-block;
+    width: fit-content;
+    text-align: right;
+    vertical-align: top;
+    margin: 20px 0px 0px 0px;
+}
+#pass{  
+    color:black;
+    font-size: small;
+}
+.passListItem{
+    text-align: center;
+}
+.listMessage{
+    text-align: center;
+    color: coral;
+}
+/* ------- dashboard.html ------- */
+header{
+    padding: 0px 25px;
+    border-bottom: thin solid black;
+}
+#head{
+    margin-right: 300px;
+    display: inline-block;
+}
+#navWelcome{
+    display:inline-block;
+    color: black;
+}
+.navLink{
+    color:coral;
+    margin: 0px 20px;
+    font-size: larger;
+    text-align: right;
+}
+#displayMessage{
+    display:inline-block;
+    width: 460px;
+    margin: 25px 0px 0px 20px;
+    vertical-align: top;
+}
+#messageForm{
+    display:inline-block;
+    width: 455px;
+    margin: 25px 20px;
+    border-left: thin solid black;
+}
+.formLabel{
+    text-align: center;
+}
+#contentInput{
+    width: 350px;
+    height: 20px;
+    overflow-y: scroll;
+}
+#submitButton{
+    padding: 2px 5px;
+    margin-left: 75%;
+}
+.messageLabel{
+    margin-bottom: 0px;
+}
+.link{
+    display: block;
+    color: coral;
+    text-align: right;
+    border-bottom: thin dashed black;
+}
+#list{
+    text-align: left;
+    margin: 0px;
+}
+.listItem{
+    text-align: left;
+}
+#subSubHead{
+    text-align: center;
+}
