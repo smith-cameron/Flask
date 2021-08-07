@@ -1,0 +1,68 @@
+#wrapper{
+    margin: 0px auto;
+    padding:15px 0px;
+    width: 1000px;
+    height: fit-content;
+    border: dashed red 1px;
+    font-family:Arial, Helvetica, sans-serif;
+    background: rgb(92,97,176);
+    background: radial-gradient(circle, rgba(92,97,176,1) 0%, rgba(40,46,91,1) 84%);
+    color: blanchedalmond;
+}
+#head{
+    text-align: center;
+}
+.subHead{
+    text-align: center;
+    text-decoration: underline;
+}
+.link{
+    color:coral;
+}
+.navLink{
+    color:coral;
+    margin: 0px 20px;
+    font-size: larger;
+}
+.loginError{
+    color: crimson;
+    text-align: center;
+}
+.regError{
+    color: crimson;
+    text-align: center;
+}
+#displayTable{
+    display: block;
+    margin: 0px auto;
+    width: 750px;
+    border-collapse: collapse;
+}
+.tableData{
+    padding: 8px 10px;
+}
+#inputForm{
+    display: block;
+    margin: 0px auto;
+    width: 250px;
+}
+table{
+    margin: 0px auto;
+}
+header{
+    border-bottom: thin solid black;
+}
+#loginForm{
+    display: inline-block;
+    width: fit-content;
+    text-align: right;
+    vertical-align: top;
+    margin: 20px 0px 0px 0px;
+}
+#regForm{
+    display: inline-block;
+    width: fit-content;
+    text-align: right;
+    vertical-align: top;
+    margin: 20px 150px 35px 150px;
+}
