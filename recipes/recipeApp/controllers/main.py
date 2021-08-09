@@ -15,9 +15,20 @@ def dashboard():
                 "i" : thisUserId
             }
         thisUser = User.findById(data)
-        allUsers = User.getAll()
+        allRecipes = Recipe.getAll()
         print(thisUser)
-        return render_template('dashboard.html', users = allUsers, user = thisUser, dtf = dateFormat)
+        return render_template('dashboard.html', recipes = allRecipes, user = thisUser, dtf = dateFormat)
+    return redirect('/')
+
+@app.route('/create')
+def renderCreate():
+    if 'userId' in session:
+        thisUserId = session['userId']
+        data = {
+                "i" : thisUserId
+            }
+        thisUser = User.findById(data)
+        return render_template('recipeNew.html', user = thisUser)
     return redirect('/')
 
 @app.route('/create',methods=['POST'])
@@ -28,12 +39,13 @@ def createRecipe():
             "d" : request.form['desc'],
             "i" : request.form['inst'],
             "lm" : request.form['lastMade'],
+            "tl" : request.form['timeLimit'],
             "c" : request.form['creator']
         }
         recipeId = Recipe.save(data)
         print(recipeId)
         return redirect('/home')
-    return redirect('/')
+    return redirect('/create')
 
 @app.route('/user/<int:id>/delete')
 def deleteUser(id):

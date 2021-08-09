@@ -24,22 +24,19 @@
     margin: 0px 20px;
     font-size: larger;
 }
-.loginError{
-    color: crimson;
-    text-align: center;
-}
-.regError{
+.recipeError{
     color: crimson;
     text-align: center;
 }
 #displayTable{
     display: block;
-    margin: 0px auto;
+    margin: 20px auto;
     width: 750px;
     border-collapse: collapse;
 }
 .tableData{
     padding: 8px 10px;
+    text-align: center;
 }
 #inputForm{
     display: block;
@@ -52,17 +49,6 @@ table{
 header{
     border-bottom: thin solid black;
 }
-#loginForm{
-    display: inline-block;
-    width: fit-content;
-    text-align: right;
-    vertical-align: top;
-    margin: 20px 0px 0px 0px;
-}
-#regForm{
-    display: inline-block;
-    width: fit-content;
-    text-align: right;
-    vertical-align: top;
-    margin: 20px 150px 35px 150px;
+textarea{
+    overflow-wrap: break-word;
 }

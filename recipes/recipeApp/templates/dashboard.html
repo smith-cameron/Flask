@@ -4,37 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <title>00Skeleton00</title>
+    <title>Recipe App</title>
 </head>
 <body>
 <div id=wrapper>
     <header>
         <a class=navLink href="/logout">Log Out</a>
-        <h1 id=head>Houston, We have liftoff.</h1>
-        <h2 class=subHead>Welcome {{user.firstName}}</h2>
-
+        <a class=navLink href="/create">New Recipe</a>
+        <h1 id=head>Welcome {{user.firstName}}</h1>
+        <h4 class=subHead>These are the recipes...</h4>
     </header>
     <div id="displayTable">
-        <h2 class=subHead>All Users</h2>
         <table>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Created</th>
+                <th>Name</th>
+                <th>Under 30 Min?</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            {% for user in users %}
+            {% for recipe in recipes %}
             <tr>
-                <td class="tableData" >{{user.id}}</td>
-                <td class="tableData">{{user.firstName}} {{user.lastName}}</td>
-                <td class="tableData">{{user.email}}</td>
-                <td class="tableData">{{user.createdAt.strftime(dtf)}}</td>
-                <td class="tableData"><a class="link" href="/user/{{user.id}}">Show</a> | <a class="link" href="/user/{{user.id}}/edit">Edit</a> | <a class="link" href="/user/{{user.id}}/delete">Delete</a></td>
+                <td class="tableData" >{{recipe.name}}</td>
+                {% if recipe.timeLimit == 0%}
+                <td class="tableData">False</td>
+                {% else %}
+                <td class="tableData">True</td>
+                {% endif %}
+                <td class="tableData"><a class="link" href="/recipe/{{recipe.id}}">Show</a> | <a class="link" href="/recipe/{{recipe.id}}/edit">Edit</a> | <a class="link" href="/recipe/{{recipe.id}}/delete">Delete</a></td>
             </tr>
             {% endfor %}
         </tbody>

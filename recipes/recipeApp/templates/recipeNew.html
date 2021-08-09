@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <title>Create Recipe</title>
+</head>
+<body>
+<div id=wrapper>
+    <header>
+        <a class=navLink href="/home">Dashboard</a>
+        <a class=navLink href="/logout">Log Out</a>
+        <h1 id=head>Add a New Recipe</h1>
+    </header>
+    <div id=inputForm >
+        <form action="/create" method="POST">
+            <input type="hidden" value="{{user.id}}" name="creator">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        {% if category == "recipeError" %}
+                            <p class={{category}}>{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <p>Name: <input type="text" name="name"></p>
+            <p>Discription(Optional): <input type="text" name="desc"></p>
+            <p>Instructions: <textarea name="inst"></textarea></p>
+            <p>Last Made: <input class="max-today" name="lastMade" type="date" id="datePicker" data-date-split-input="true"></p>
+            <p>Under 30 min? <input type="radio" name="timeLimit" value="1">Yes<input type="radio" name="timeLimit" value="0">No</p>
+            <input type="submit" value="Create">
+        </form>
+    </div>
+</div>
+</body>
+</html>
