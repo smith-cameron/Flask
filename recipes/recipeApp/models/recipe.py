@@ -31,7 +31,7 @@ class Recipe:
         # if request['lastMade'] > today:
         #     flash("You Cannot Time Travel", "recipeError")
         #     valid = False
-        if request['timeLimit']:
+        if not request['timeLimit']:
             flash("Field Required", "recipeError")
             valid = False
         return valid
