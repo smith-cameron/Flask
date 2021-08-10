@@ -48,13 +48,13 @@ def createRecipe():
         return redirect('/home')
     return redirect('/create')
 
-@app.route('/reecipe/<int:id>/delete')
+@app.route('/user/<int:id>/delete')
 def deleteUser(id):
     if 'userId' in session:
         data = {
                 "i" : id
             }
-        Recipe.deleteById(data)
+        User.deleteById(data)
         return redirect("/home")
     return redirect('/')
 
