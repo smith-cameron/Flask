@@ -5,7 +5,7 @@ class Recipe:
     def __init__(self, data):
         self.id = data['id']
         self.name = data['name']
-        self.desc = data['desc']
+        self.desc = data['description']
         self.instructions = data['instructions']
         self.lastMade = data['lastMade']
         self.lastMade = data['timeLimit']
@@ -52,7 +52,7 @@ class Recipe:
     def findById(cls, data):
         query = 'SELECT * FROM recipes WHERE id = %(i)s;'
         thisRecipe = connect('flaskRecipes').query_db(query, data)
-        return cls(thisRecipe[0])
+        return thisRecipe
 
     @classmethod
     def deleteById(cls, data):

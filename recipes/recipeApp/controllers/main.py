@@ -68,6 +68,21 @@ def deleteRecipe(id):
         return redirect("/home")
     return redirect('/')
 
+@app.route('/recipe/<int:id>/edit')
+def editRecipe(id):
+    if 'userId' in session:
+        thisUserId = session['userId']
+        rdata = {
+                "i" : id
+            }
+        data = {
+                "i" : thisUserId
+            }
+        thisRecipe = Recipe.findById(rdata)
+        thisUser = User.findById(data)
+        return render_template('recipeEdit.html', recipe = thisRecipe, user = thisUser)
+    return redirect('/')
+
 @app.route('/logout')
 def logOut():
     if 'userId' in session:
