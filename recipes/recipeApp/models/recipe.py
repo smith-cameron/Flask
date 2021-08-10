@@ -8,7 +8,7 @@ class Recipe:
         self.desc = data['desc']
         self.instructions = data['instructions']
         self.lastMade = data['lastMade']
-        self.lastMade = data['time']
+        self.lastMade = data['timeLimit']
         self.createdAt = data['createdAt']
         self.updatedAt = data['updatedAt']
 
@@ -31,9 +31,9 @@ class Recipe:
         # if request['lastMade'] > today:
         #     flash("You Cannot Time Travel", "recipeError")
         #     valid = False
-        # if request['timeLimit'] < 0 or request['timeLimit'] > 1:
-        #     flash("Field Required", "recipeError")
-        #     valid = False
+        if request['timeLimit']:
+            flash("Field Required", "recipeError")
+            valid = False
         return valid
 
     @classmethod

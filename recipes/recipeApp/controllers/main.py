@@ -33,6 +33,7 @@ def renderCreate():
 
 @app.route('/create',methods=['POST'])
 def createRecipe():
+    print(request.form)
     if Recipe.validate(request.form):
         data = {
             "n" : request.form['name'].title(),
@@ -47,13 +48,13 @@ def createRecipe():
         return redirect('/home')
     return redirect('/create')
 
-@app.route('/user/<int:id>/delete')
+@app.route('/reecipe/<int:id>/delete')
 def deleteUser(id):
     if 'userId' in session:
         data = {
                 "i" : id
             }
-        User.deleteById(data)
+        Recipe.deleteById(data)
         return redirect("/home")
     return redirect('/')
 
