@@ -31,6 +31,7 @@
             <p>Name: <input type="text" name="name" value="{{r.name}}"></p>
             <p>Discription(Optional): <input type="text" name="description" value="{{r.description}}"></p>
             <p>Instructions: <input type="text" name="instructions" value="{{r.instructions}}"></input></p>
+            <!-- LastMade and timeLimit not displaying precreated defaults Ln.35/36 -->
             <p>Last Made: <input name="lastMade" type="date" id="datePicker" value="{{r.lastMade}}"></p>
             <p>Under 30 min? <input type="radio" name="timeLimit" value="1">Yes<input type="radio" name="timeLimit" value="0">No</p>
             <input type="submit" value="Update">

@@ -5,7 +5,7 @@ from recipeApp.controllers import loginReg
 from recipeApp.models.user import User
 from recipeApp.models.recipe import Recipe
 from datetime import datetime
-dateFormat = "%m/%d/%Y %-I:%M %p"
+dateFormat = "%m/%d/%Y"
 
 @app.route('/home')
 def dashboard():
@@ -81,6 +81,21 @@ def editRecipe(id):
         thisRecipe = Recipe.findById(rdata)
         thisUser = User.findById(data)
         return render_template('recipeEdit.html', recipe = thisRecipe, user = thisUser)
+    return redirect('/')
+
+@app.route('/recipe/<int:id>')
+def showRecipe(id):
+    if 'userId' in session:
+        thisUserId = session['userId']
+        rdata = {
+                "i" : id
+            }
+        data = {
+                "i" : thisUserId
+            }
+        thisRecipe = Recipe.findById(rdata)
+        thisUser = User.findById(data)
+        return render_template('recipeDisplay.html', recipe = thisRecipe, user = thisUser, dtf = dateFormat)
     return redirect('/')
 
 @app.route('/logout')
