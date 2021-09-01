@@ -54,7 +54,6 @@ def dashboard():
         thisUsersMessages = Message.findByUserId(data)
         sentCount = Message.sentMessagesCount(data)
         recievedCount = Message.recievedMessageCount(data)
-        # print(sentCount)
         return render_template('dashboard.html', users = allOtherUsers, user = thisUser, myMessages = thisUsersMessages, sent = sentCount, recieved = recievedCount, dtf = dateFormat)
     return redirect('/')
 
