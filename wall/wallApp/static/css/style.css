@@ -111,3 +111,6 @@ header{
 #subSubHead{
     text-align: center;
 }
+li{
+    list-style: none;
+}
