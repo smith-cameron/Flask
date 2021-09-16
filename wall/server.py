@@ -1,5 +1,5 @@
 from wallApp import app
-from wallApp.controllers import main
+from wallApp.controllers import main, loginReg
 
 
 

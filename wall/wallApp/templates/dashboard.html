@@ -14,25 +14,31 @@
         <a class=navLink href="/logout">Log Out</a>
     </header>
     <div id=displayMessage>
-        <h3 class=subHead>{{recieved}} Message(s) for You</h3>
-        {% for message in myMessages %}
-        <p class=messageLabel>{{message.firstName}} said:</p>
+        <h3 class=subHead>{{recieved}} Post(s) for You</h3>
+        {% for post in myPosts %}
+        <p class=messageLabel>{{post.firstName}} said:</p>
         <ul id=list>
                 <!-- if message.creator is in my list of friends -->
-                <li class=listItem>{{message.content}}</li>
+                <li class=listItem>{{post.content}}</li>
                 <!-- ulike button -->
                 <!-- else -->
                 <!-- display like button -->
             </ul>
-            <a class=link href="/delete/{{message.id}}">Delete</a>
+            <a class=link href="/delete/{{post.id}}">Delete</a>
         {% endfor %}
     </div>
     <div id=messageForm>
-        <h3 class=subHead>Send Messages</h3>
-        <p id=subSubHead>You have {{sent}} sent messages.</p>
+        <h3 class=subHead>Make Posts</h3>
+        <p id=subSubHead>You have made
+            {% if sent == 1 %}
+                {{sent}} post.</p>
+            {% else %}
+                {{sent}} posts.</p>
+            {% endif %}
         <form action="/send" method="POST">
             <p class=formLabel>Recipient: </p>
             <select name="recipientId">
+                <option selected disabled>---- Select One ----</option>
                 {% for recipient in users %}
                 <option value="{{recipient.id}}">{{recipient.firstName}} {{recipient.lastName}}</option>
                 {% endfor %}

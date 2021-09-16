@@ -1,6 +1,6 @@
 from wallApp.config.mysqlDB import connect
 
-class Message:
+class Post:
     def __init__(self, data):
         self.id = data['id']
         self.content = data['content']
@@ -11,34 +11,34 @@ class Message:
 
     @classmethod
     def getAll(cls):
-        query = 'SELECT * FROM messages;'
-        allMessages = connect('flaskWall').query_db(query)
-        return allMessages
+        query = 'SELECT * FROM posts;'
+        allPosts = connect('flaskWall').query_db(query)
+        return allPosts
 
     @classmethod
     def save(cls, data):
-        query = 'Insert INTO messages (content, creatorId, recipientId, createdAt) VALUES(%(c)s, %(ci)s, %(ri)s, NOW());'
+        query = 'Insert INTO posts (content, creatorId, recipientId, createdAt) VALUES(%(c)s, %(ci)s, %(ri)s, NOW());'
         return connect('flaskWall').query_db(query, data)
 
     @classmethod
     def findByUserId(cls, data):
-        query = 'SELECT * FROM messages m JOIN users u ON m.creatorId = u.id WHERE recipientId = %(i)s;'
+        query = 'SELECT * FROM posts m JOIN users u ON m.creatorId = u.id WHERE recipientId = %(i)s;'
         return connect('flaskWall').query_db(query, data)
 
     @classmethod
     def findById(cls, data):
-        query = 'SELECT * FROM messages WHERE id = %(i)s;'
+        query = 'SELECT * FROM posts WHERE id = %(i)s;'
         thisMessage = connect('flaskWall').query_db(query, data)
         return cls(thisMessage[0])
 
     @classmethod
     def deleteById(cls, data):
-        query = 'DELETE FROM messages WHERE id = %(i)s;'
+        query = 'DELETE FROM posts WHERE id = %(i)s;'
         connect('flaskWall').query_db(query, data)
 
     @classmethod
-    def sentMessagesCount(cls, data):
-        query = 'SELECT COUNT(id) FROM messages WHERE creatorId = %(i)s;'
+    def sentPostsCount(cls, data):
+        query = 'SELECT COUNT(id) FROM posts WHERE creatorId = %(i)s;'
         count = connect('flaskWall').query_db(query, data)
         val = 0
         for c in count:
@@ -47,8 +47,8 @@ class Message:
         return val
 
     @classmethod
-    def recievedMessageCount(cls, data):
-        query = 'SELECT COUNT(id) FROM messages WHERE recipientId = %(i)s;'
+    def recievedPostCount(cls, data):
+        query = 'SELECT COUNT(id) FROM posts WHERE recipientId = %(i)s;'
         count = connect('flaskWall').query_db(query, data)
         val = 0
         for c in count:

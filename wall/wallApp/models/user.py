@@ -68,9 +68,15 @@ class User:
 
     @classmethod
     def getAllOthers(cls, data):
-        print(data)
         query = 'SELECT * FROM users WHERE id != %(i)s ORDER BY firstName ASC;'
         allUsers = connect('flaskWall').query_db(query, data)
+        print(allUsers)
+        return allUsers
+
+    @classmethod
+    def getAll(cls):
+        query = 'SELECT * FROM users ORDER BY firstName ASC;'
+        allUsers = connect('flaskWall').query_db(query)
         print(allUsers)
         return allUsers
 
