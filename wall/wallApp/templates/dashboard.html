@@ -16,9 +16,13 @@
     <div id=displayMessage>
         <h3 class=subHead>{{recieved}} Message(s) for You</h3>
         {% for message in myMessages %}
-            <p class=messageLabel>{{message.firstName}} said:</p>
-            <ul id=list>
+        <p class=messageLabel>{{message.firstName}} said:</p>
+        <ul id=list>
+                <!-- if message.creator is in my list of friends -->
                 <li class=listItem>{{message.content}}</li>
+                <!-- ulike button -->
+                <!-- else -->
+                <!-- display like button -->
             </ul>
             <a class=link href="/delete/{{message.id}}">Delete</a>
         {% endfor %}
@@ -27,7 +31,8 @@
         <h3 class=subHead>Send Messages</h3>
         <p id=subSubHead>You have {{sent}} sent messages.</p>
         <form action="/send" method="POST">
-            <p class=formLabel>Recipient: <select name="recipientId"></p>
+            <p class=formLabel>Recipient: </p>
+            <select name="recipientId">
                 {% for recipient in users %}
                 <option value="{{recipient.id}}">{{recipient.firstName}} {{recipient.lastName}}</option>
                 {% endfor %}

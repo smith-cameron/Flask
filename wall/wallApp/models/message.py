@@ -18,14 +18,12 @@ class Message:
     @classmethod
     def save(cls, data):
         query = 'Insert INTO messages (content, creatorId, recipientId, createdAt) VALUES(%(c)s, %(ci)s, %(ri)s, NOW());'
-        messageId = connect('flaskWall').query_db(query, data)
-        return messageId
+        return connect('flaskWall').query_db(query, data)
 
     @classmethod
     def findByUserId(cls, data):
         query = 'SELECT * FROM messages m JOIN users u ON m.creatorId = u.id WHERE recipientId = %(i)s;'
-        theseMessages = connect('flaskWall').query_db(query, data)
-        return theseMessages
+        return connect('flaskWall').query_db(query, data)
 
     @classmethod
     def findById(cls, data):
