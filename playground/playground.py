@@ -7,8 +7,8 @@ def blue3():
 
 @playground.route('/play/<num>')
 def blueX(num):
-    if num.isdigit():
-        return render_template('index.html', times=int(num) )
+    # if num.isdigit():
+    return render_template('index.html', times=int(num) )
 
 @playground.route('/play/<num>/<color>')
 def colorX(num, color):

@@ -22,5 +22,5 @@ class Ninja:
     @classmethod
     def save(cls, data):
         query = 'Insert INTO ninjas (firstName, lastName, age, dojoId, createdAt) VALUES(%(fn)s, %(ln)s, %(a)s, %(d)s, NOW());'
-        ninjaId = connect('dojosNinjas').query_db(query, data)
-        return ninjaId
+        ninja = connect('dojosNinjas').query_db(query, data)
+        return ninja

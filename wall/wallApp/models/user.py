@@ -18,23 +18,24 @@ class User:
         allowedSymbols =['$', '@', '#', '%', '!', '&', '*']
         valid = True
         if len(request['firstName']) < 1:
-            flash("**First Name Required**", "regError")
-            valid = False
+                flash("**First Name Required**", "regError")
+                valid = False
         if len(request['firstName']) >= 1 and len(request['firstName']) < 2:
-            flash("**First Name Must Be 2 Characters Or More**", "regError")
-            valid = False
+                flash("**First Name Must Be 2 Characters Or More**", "regError")
+                valid = False
         if len(request['lastName']) < 1:
-            flash("**Last Name Required**", "regError")
-            valid = False
+                flash("**Last Name Required**", "regError")
+                valid = False
         if len(request['lastName']) >= 1 and len(request['lastName']) < 2:
-            flash("**Last Name Must Be 2 Characters Or More**", "regError")
-            valid = False
+                flash("**Last Name Must Be 2 Characters Or More**", "regError")
+                valid = False
         if not EMAIL_REGEX.match(request['email']):
             flash("**Invalid Email Address**", "regError")
             valid = False
         if len(request['email']) < 1:
             flash("**Email Required**", "regError")
             valid = False
+        
         if len(request['password']) < 1:
             flash("**Password Required**", "regError")
             valid = False
@@ -51,7 +52,7 @@ class User:
             print('**Password Requires Minimum Of One Lowercase Letter**', "regError")
             valid = False
         if not any(char in allowedSymbols for char in request['password']):
-            print('**Password Requires Minimum Of One Symbol $@#%!&***', "regError")
+            print('**Password Requires Minimum Of One Symbol $@#%!&**', "regError")
             valid = False
         if request['password'] != request['passConf']:
             flash("**Passwords Do Not Match**", "regError")
@@ -61,10 +62,10 @@ class User:
     @classmethod
     def getByEmail(cls,data):
         query = "SELECT * FROM users WHERE email = %(email)s;"
-        userEmail = connect("flaskWall").query_db(query,data)
-        if len(userEmail) < 1:
+        results = connect("flaskWall").query_db(query,data)
+        if len(results) < 1:
             return False
-        return cls(userEmail[0])
+        return cls(results[0])
 
     @classmethod
     def getAllOthers(cls, data):

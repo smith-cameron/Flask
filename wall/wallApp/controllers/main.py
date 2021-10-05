@@ -17,7 +17,7 @@ def dashboard():
         data = {
                 "i" : thisUserId
             }
-        print(data)
+        # print(data)
         thisUser = User.findById(data)
         allUsers = User.getAll()
         thisUsersPosts = Post.findByUserId(data)

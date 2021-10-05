@@ -4,9 +4,25 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "*"
+argcomplete = "==1.12.3"
+"backports.entry-points-selectable" = "==1.1.0"
+certifi = "==2021.5.30"
+click = "==8.0.1"
+colorama = "==0.4.4"
+distlib = "==0.3.2"
+filelock = "==3.0.12"
+mysql-connector-python = "==8.0.25"
+pi = "==0.1.2"
+pipenv = "==2021.5.29"
+pipx = "==0.16.4"
+platformdirs = "==2.3.0"
+pyparsing = "==2.4.7"
+six = "==1.16.0"
+userpath = "==1.7.0"
+virtualenv = "==20.7.2"
+virtualenv-clone = "==0.5.7"
 
 [dev-packages]
 
 [requires]
-python_version = "3.8"
+python_version = "3.9"
