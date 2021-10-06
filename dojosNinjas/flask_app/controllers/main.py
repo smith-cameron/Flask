@@ -4,7 +4,7 @@ from flask import render_template, request, redirect, session, flash
 from flask_app.models.Dojo import Dojo
 from flask_app.models.Ninja import Ninja
 from datetime import datetime
-dateFormat = "%m/%d/%Y %-I:%M %p"
+dateFormat = "%m/%d/%Y %I:%M %p"
 
 @app.route('/')
 def index():
@@ -37,7 +37,7 @@ def createNinja():
             "a" : request.form['age'],
             "d" : request.form['dojoId']
     }
-	print(Ninja.save(data))
+	thisNinja = Ninja.save(data)
 	return redirect('/dojos/'+data['d'])
 
 @app.route('/dojos/<int:id>')

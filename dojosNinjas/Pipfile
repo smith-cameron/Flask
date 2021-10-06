@@ -21,6 +21,8 @@ six = "==1.16.0"
 userpath = "==1.7.0"
 virtualenv = "==20.7.2"
 virtualenv-clone = "==0.5.7"
+flask = "*"
+pymysql = "*"
 
 [dev-packages]
 
