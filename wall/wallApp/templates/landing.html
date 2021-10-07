@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Welcome, {{user.firstName}}!</title>
+</head>
+<body>
+    <div id=wrapper>
+        <header>
+            <h1 id=head>Title Here</h1>
+            <h2 id=navTitle>SubTitle Here</h2>
+            <a class=navLink href="/posts">Posts</a>
+            <a class=navLink href="/logout">Log Out</a>
+        </header>
+        <div id=userNav>
+            <h3 class=subHead>All the People</h3>
+            {% for u in users %}
+            <p class=messageLabel>{{u.firstName}}</p>
+                <a class=link href="/follow/{{u.id}}">Follow</a>
+            {% endfor %}
+        </div>
+        <div id=messageForm>
+            
+        </div>
+    </div>
+</body>
+</html>
