@@ -13,7 +13,8 @@ def index():
 
 @app.route('/register',methods=['POST'])
 def register():
-    if User.validateRegistration(request.form):
+    emailInput = { "e" : request.form['email']}
+    if User.validateRegistration(request.form) and User.uniqueEmail(emailInput):
         pw_hash = bcrypt.generate_password_hash(request.form['password'])
         data = {
             "fn" : request.form['firstName'].capitalize(),
@@ -24,21 +25,22 @@ def register():
         userId = User.save(data)
         session['userId'] = userId
         print(session['userId'])
-        return redirect('/home')
+        return redirect('/landing')
     return redirect('/')
 
 @app.route('/login', methods=['POST'])
 def login():
-    data = { "email" : request.form["email"] }
+    data = { "e" : request.form["email"] }
     user = User.getByEmail(data)
-    if not user:
-        flash("**Invalid Email/Password Input**", 'loginError')
-        return redirect("/")
-    if not bcrypt.check_password_hash(user.password, request.form['password']):
+    if user:
+        if bcrypt.check_password_hash(user.password, request.form['password']):
+            session['userId'] = user.id
+            # Save email to session
+            return redirect("/landing")
         flash("**Invalid Email/Password Input**", 'loginError')
         return redirect('/')
-    session['userId'] = user.id
-    return redirect("/home")
+    flash("**Invalid Email/Password Input**", 'loginError')
+    return redirect("/")
 
 @app.route('/logout')
 def sessionReset():

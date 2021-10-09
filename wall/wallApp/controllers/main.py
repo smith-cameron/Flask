@@ -8,46 +8,46 @@ bcrypt = Bcrypt(app)
 from datetime import datetime
 dateFormat = "%m/%d/%Y %-I:%M %p"
 
-
-
-@app.route('/home')
-def dashboard():
+@app.route('/landing')
+def landingDashboard():
     if 'userId' in session:
         thisUserId = session['userId']
         data = {
                 "i" : thisUserId
             }
-        # print(data)
         thisUser = User.findById(data)
         allUsers = User.getAll()
         thisUsersPosts = Post.findByUserId(data)
         sentCount = Post.sentPostsCount(data)
         recievedCount = Post.recievedPostCount(data)
-        return render_template('dashboard.html', users = allUsers, user = thisUser, myPosts = thisUsersPosts, sent = sentCount, recieved = recievedCount, dtf = dateFormat)
+        return render_template('landing.html', users = allUsers, user = thisUser, myPosts = thisUsersPosts, sent = sentCount, recieved = recievedCount, dtf = dateFormat)
     return redirect('/')
 
-@app.route('/send', methods=['POST'])
-def sendPost():
-    creator = session['userId']
-    data = {
-            "c" : request.form['content'],
-            "ci" : creator,
-            "ri" : request.form['recipientId']
-        }
-    print(Post.save(data))
-    return redirect('/home')
-
-@app.route('/delete/<int:id>')
-def deletePost(id):
+@app.route('/follow/<int:toLikeId>')
+def follow(toLikeId):
     if 'userId' in session:
+        loggedUserId = session['userId']
         data = {
-                "i" : id
+                "i" : loggedUserId
             }
-        thisMessage = Post.findById(data)
-        if session['userId'] == thisMessage.recipientId:
-            Post.deleteById(data)
-            return redirect('/home')
-        return redirect('/')
+        User.follow(data)
+        return redirect('/landing')
     return redirect('/')
 
+# landing.html
+    # All users/ whos logged in 
+        # Like/Unlike User/Make Friends
+    # Recent posts(since last login)
+        # to your wall
+        # to other walls
+    # Pictures??
+    # links to 
+        # Edit Your User Info - Validate
+# Post dashboard.html 
+    # Like/Unlike Post
+    # Like/Unlike Comments
+    # Edit Post - Validate
+    # Comment on Posts - Validate
+        # Edit Comments - Validate
+        # Delete Comments
 
