@@ -1,4 +1,5 @@
 from wallApp.config.mysqlDB import connect
+from flask import flash
 
 class Post:
     def __init__(self, data):
@@ -8,6 +9,17 @@ class Post:
         self.recipientId = data['recipientId']
         self.createdAt = data['createdAt']
         self.updatedAt = data['updatedAt']
+
+    @staticmethod
+    def validatePost(request):
+        valid = True
+        if len(request['content']) < 1:
+            flash("**Post Content Required**", "postError")
+            valid = False
+        if len(request['content']) > 255:
+            flash("**Post Too Long**", "postError")
+            valid = False
+        return valid
 
     @classmethod
     def getAll(cls):
