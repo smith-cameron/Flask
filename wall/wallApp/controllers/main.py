@@ -13,26 +13,49 @@ def landingDashboard():
     if 'userId' in session:
         thisUserId = session['userId']
         data = {
-                "i" : thisUserId
+            "i" : thisUserId
             }
         thisUser = User.findById(data)
+        followerIds = User.getFollowers(data)
+        allButMe = User.getAllButOne(data)
         allUsers = User.getAll()
         thisUsersPosts = Post.findByUserId(data)
         sentCount = Post.sentPostsCount(data)
         recievedCount = Post.recievedPostCount(data)
-        return render_template('landing.html', users = allUsers, user = thisUser, myPosts = thisUsersPosts, sent = sentCount, recieved = recievedCount, dtf = dateFormat)
+        return render_template('landing.html', users = allButMe, user = thisUser, myPosts = thisUsersPosts, sent = sentCount, recieved = recievedCount, dtf = dateFormat, followers = followerIds)
     return redirect('/')
 
-@app.route('/follow/<int:toLikeId>')
-def follow(toLikeId):
+@app.route('/follow/<int:toFollow>')
+def follow(toFollow):
     if 'userId' in session:
         loggedUserId = session['userId']
         data = {
-                "i" : loggedUserId
+            "i" : loggedUserId,
+            "z" : toFollow
             }
         User.follow(data)
         return redirect('/landing')
     return redirect('/')
+
+@app.route('/unfollow/<int:toUnFollow>')
+def unFollow(toUnFollow):
+    if 'userId' in session:
+        data = {      
+                "z" : toUnFollow
+            }
+        User.unfollow(data)
+        return redirect('/landing')
+    return redirect('/')
+
+@app.route('/user/edit')
+def edidUser():
+    if 'userId' in session:
+        loggedUserId = session['userId']
+        data = {
+            "i" : loggedUserId
+            }
+
+
 
 # landing.html
     # All users/ whos logged in 

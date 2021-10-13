@@ -9,32 +9,35 @@ from datetime import datetime
 dateFormat = "%m/%d/%Y %-I:%M %p"
 
 @app.route('/posts')
-def messgaeDashboard():
+def messageDashboard():
     if 'userId' in session:
         thisUserId = session['userId']
         data = {
                 "i" : thisUserId
             }
         thisUser = User.findById(data)
+        allButMe = User.getAllButOne(data)
         allUsers = User.getAll()
         thisUsersPosts = Post.findByUserId(data)
         sentCount = Post.sentPostsCount(data)
         recievedCount = Post.recievedPostCount(data)
-        return render_template('dashboard.html', users = allUsers, user = thisUser, myPosts = thisUsersPosts, sent = sentCount, recieved = recievedCount, dtf = dateFormat)
+        return render_template('dashboard.html', users = allButMe, user = thisUser, myPosts = thisUsersPosts, sent = sentCount, recieved = recievedCount, dtf = dateFormat)
     return redirect('/')
 
 @app.route('/send', methods=['POST'])
 def post():
-    if Post.validatePost(request.form):
-        creator = session['userId']
-        data = {
-                "c" : request.form['content'],
-                "ci" : creator,
-                "ri" : request.form['recipientId']
-            }
-        print(Post.save(data))
+    if 'userId' in session:
+        if Post.validatePost(request.form):
+            creator = session['userId']
+            data = {
+                    "c" : request.form['content'],
+                    "ci" : creator,
+                    "ri" : request.form['recipientId']
+                }
+            Post.save(data)
+            return redirect('/posts')
         return redirect('/posts')
-    return redirect('/posts')
+    return redirect('/')
 
 @app.route('/deletepost/<int:id>')
 def deletePost(id):

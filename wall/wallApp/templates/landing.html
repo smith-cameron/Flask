@@ -10,16 +10,21 @@
 <body>
     <div id=wrapper>
         <header>
-            <h1 id=head>Title Here</h1>
-            <h2 id=navTitle>SubTitle Here</h2>
+            <h1 id=head>{{user.firstName}}!</h1>
+            <h2 id=navTitle>...your wall.</h2>
             <a class=navLink href="/posts">Posts</a>
             <a class=navLink href="/logout">Log Out</a>
+            <a class=navLink href="/user/edit">Acct Info</a>
         </header>
         <div id=userNav>
             <h3 class=subHead>All the People</h3>
             {% for u in users %}
-            <p class=messageLabel>{{u.firstName}}</p>
-                <a class=link href="/follow/{{u.id}}">Follow</a>
+                <p class=messageLabel>{{u.firstName}}</p>
+                {% if u.id in followers %}
+                    <a class=link href="/unfollow/{{u.id}}">UnFollow</a>
+                {%else%}
+                    <a class=link href="/follow/{{u.id}}">Follow</a>
+                {% endif %}
             {% endfor %}
         </div>
         <div id=messageForm>

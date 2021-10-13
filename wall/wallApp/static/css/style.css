@@ -39,7 +39,7 @@ li{
     margin: 20px 0px 0px 0px;
 }
 #pass{  
-    color:black;
+    color:whitesmoke;
     font-size: small;
 }
 .passListItem{
@@ -50,15 +50,19 @@ li{
     color: coral;
 }
 /* ------- dashboard.html ------- */
+/* ------- landing.html ------- */
 header{
+    display: flex;
+    align-items: center;
     padding: 0px 25px;
     border-bottom: thin solid black;
+    justify-content: space-evenly;
 }
 #head{
-    margin-right: 300px;
+    margin-right: 40%;
     display: inline-block;
 }
-#navWelcome{
+#navTitle{
     display:inline-block;
     color: black;
 }
@@ -68,6 +72,7 @@ header{
     font-size: larger;
     text-align: right;
 }
+/* ------- dashboard.html ------- */
 #displayMessage{
     display:inline-block;
     width: 460px;
@@ -114,4 +119,11 @@ header{
 }
 li{
     list-style: none;
+}
+/* ------- landing.html ------- */
+#userNav{
+    display:inline-block;
+    width: 260px;
+    margin: 25px 0px 0px 20px;
+    vertical-align: top;
 }
