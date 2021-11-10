@@ -1,4 +1,4 @@
-from recipeApp import app
+    from recipeApp import app
 from flask import Flask
 from flask import render_template, request, redirect, session, flash
 from recipeApp.controllers import loginReg

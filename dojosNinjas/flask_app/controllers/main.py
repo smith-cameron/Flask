@@ -47,7 +47,7 @@ def showDojo(id):
     }
     thisDojo = Dojo.getById(data)
     ThisDojoNinjas = Dojo.getNinjas(data)
-    print(thisDojo)
+    print(ThisDojoNinjas)
     return render_template('dojoInfo.html', dojo = thisDojo, ninjas = ThisDojoNinjas, dtf = dateFormat)
 
 

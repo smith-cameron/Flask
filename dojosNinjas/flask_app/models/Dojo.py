@@ -1,7 +1,7 @@
 from flask_app.config.mysqlDB import connect
 
 class Dojo:
-    def __iniy__(self, data):
+    def __init__(self, data):
         self.id = data['id']
         self.name = data['n']
         self.createdAt = data['created_at']
