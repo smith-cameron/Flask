@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, session
 from mysqlconnection import connectToMySQL
 from datetime import datetime
+myDB = 'SemiRestfulUsers'
 
 app = Flask(__name__)
 app.secret_key = 'secret_keyy'
@@ -9,7 +10,7 @@ updateFormat = "%B-%d-%Y at %-I:%M %p"
 
 @app.route('/users')
 def index():
-    mysql = connectToMySQL('SemiRestfulUsers')
+    mysql = connectToMySQL(myDB)
     query = mysql.query_db('SELECT * FROM users;')
     #print(query)
     return render_template('index.html', allUsers = query, dtf = createFormat)
@@ -21,7 +22,7 @@ def createPage():
 @app.route('/users/create', methods = ["POST"])
 def createUser():
     #print(request.form)
-    mysql = connectToMySQL('SemiRestfulUsers')
+    mysql = connectToMySQL(myDB)
     query = "INSERT INTO users (first_name, last_name, email, created_at) VALUES (%(fn)s, %(ln)s, %(e)s, NOW());"
     data = {
         "fn" : request.form["firstName"],
@@ -37,7 +38,7 @@ def show(user_id):
     data = {
         "id" : user_id
     }
-    mysql = connectToMySQL('SemiRestfulUsers')
+    mysql = connectToMySQL(myDB)
     thisUser = mysql.query_db(query, data)
     print(thisUser)
     return render_template('show.html', users = thisUser, ctf = createFormat, utf = updateFormat)
@@ -48,7 +49,7 @@ def edit(user_id):
     data = {
         "id" : user_id
     }
-    mysql = connectToMySQL('SemiRestfulUsers')
+    mysql = connectToMySQL(myDB)
     thisUser = mysql.query_db(query, data)
     print(thisUser)
     return render_template('edit.html', users = thisUser, ctf = createFormat, utf = updateFormat)
@@ -63,7 +64,7 @@ def editPost(user_id):
         "id" : user_id
     }
     print(user_id)
-    mysql = connectToMySQL('SemiRestfulUsers')
+    mysql = connectToMySQL(myDB)
     mysql.query_db(query, formData)
     return redirect('/users')
 
@@ -73,7 +74,7 @@ def delete(user_id):
     data = {
         'id': user_id
     }
-    mysql = connectToMySQL('SemiRestfulUsers')
+    mysql = connectToMySQL(myDB)
     print(user_id)
     mysql.query_db(query, data)
     return redirect('/users')

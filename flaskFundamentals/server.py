@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, session, flash
 from mysqlDB import connectToMySQL    # import the function that will return an instance of a connection
 app = Flask(__name__)
 app.secret_key = 'Dont take any wooden nickles.'
+myDB = 'firstFlask'
 
 @app.route('/')
 def index():
@@ -45,7 +46,7 @@ def showUser():
 
 @app.route("/friends")
 def showFriends():
-    mysql = connectToMySQL('first_flask')   # call the function, passing in the name of our db
+    mysql = connectToMySQL(myDB)   # call the function, passing in the name of our db
     friends = mysql.query_db('SELECT * FROM users;')  # call the query_db function, pass in the query as a string
     print(friends)
     return render_template("friends.html", allFriends = friends)
@@ -53,7 +54,7 @@ def showFriends():
 # @app.route("/createFriend", methods=["POST"])
 # def addFriend():
 #     print(request.form)
-#     mysql = connectToMySQL('first_flask')
+#     mysql = connectToMySQL(myDB)
 #     query = "INSERT INTO users (first_name, last_name, email, occupation, created_at, updated_at) VALUES (%(fn)s, %(ln)s, %(em)s, %(occup)s, NOW(), NOW());"
 #     input = {
 #         "fn" : request.form["fname"],
@@ -82,7 +83,7 @@ def addFriendValidated():
     #if is_valid:
     if not '_flashes' in session.keys():
         print(request.form)
-        mysql = connectToMySQL('first_flask')
+        mysql = connectToMySQL(myDB)
         query = "INSERT INTO users (first_name, last_name, email, occupation, created_at, updated_at) VALUES (%(fn)s, %(ln)s, %(em)s, %(occup)s, NOW(), NOW());"
         input = {
             "fn" : request.form["fname"],

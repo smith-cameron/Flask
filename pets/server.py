@@ -1,14 +1,13 @@
 from flask import Flask, render_template, request, redirect, session
 from mysqlDB import connectToMySQL
-
 app = Flask(__name__)
 app.secret_key = 'secret_keyy'
-
+myDB = 'flaskPets'
 
 
 @app.route('/')
 def index():
-    mysql = connectToMySQL('Pets')
+    mysql = connectToMySQL(myDB)
     myPets = mysql.query_db('SELECT * FROM pets;')
     print(myPets)
     return render_template('index.html', allMyPets = myPets)
@@ -16,7 +15,7 @@ def index():
 @app.route('/addPet', methods=["POST"])
 def addPet():
     print(request.form)
-    mysql = connectToMySQL('Pets')
+    mysql = connectToMySQL(myDB)
     query = "INSERT INTO pets (name, type, created_at, updated_at) VALUES (%(n)s, %(t)s, NOW(), NOW());"
     input = {
         "n" : request.form["name"],

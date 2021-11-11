@@ -1,4 +1,5 @@
 from flask_app.config.mysqlDB import connect
+myDB = 'flaskDojosNinjas'
 
 class Dojo:
     def __init__(self, data):
@@ -10,23 +11,23 @@ class Dojo:
     @classmethod
     def getAll(cls):
         query = 'SELECT * FROM dojos;'
-        allDojos = connect('dojosNinjas').query_db(query)
+        allDojos = connect(myDB).query_db(query)
         return allDojos
 
     @classmethod
     def save(cls, data):
         query = 'Insert INTO dojos (name, createdAt) VALUES(%(n)s, NOW());'
-        user_id = connect('dojosNinjas').query_db(query, data)
+        user_id = connect(myDB).query_db(query, data)
         return user_id
 
     @classmethod
     def getById(cls, data):
         query = 'SELECT * FROM dojos WHERE id= %(i)s;'
-        thisDojo = connect('dojosNinjas').query_db(query, data)
+        thisDojo = connect(myDB).query_db(query, data)
         return thisDojo
 
     @classmethod
     def getNinjas(cls, data):
         query = 'SELECT * FROM ninjas WHERE dojoId= %(i)s;'
-        thisDojosNinjas = connect('dojosNinjas').query_db(query, data)
+        thisDojosNinjas = connect(myDB).query_db(query, data)
         return thisDojosNinjas

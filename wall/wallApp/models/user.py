@@ -2,6 +2,7 @@ from wallApp.config.mysqlDB import connect
 from flask import flash
 import re
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+myDB = 'flaskWall'
 
 class User:
     def __init__(self, data):
@@ -62,7 +63,7 @@ class User:
     def uniqueEmail(data):
         valid = True
         query = "SELECT * FROM users WHERE email = %(e)s;"
-        results = connect("flaskWall").query_db(query,data)
+        results = connect(myDB).query_db(query,data)
         if len(results) > 0:
             flash("**Email Already Registered**", "regError")
             flash("**Either Log In or Choose Another**", "regError")
@@ -72,7 +73,7 @@ class User:
     @classmethod
     def getByEmail(cls,data):
         query = "SELECT * FROM users WHERE email = %(e)s;"
-        results = connect("flaskWall").query_db(query,data)
+        results = connect(myDB).query_db(query,data)
         if len(results) < 1:
             return False
         return cls(results[0])
@@ -80,49 +81,49 @@ class User:
     @classmethod
     def getAllOthers(cls, data):
         query = 'SELECT * FROM users WHERE id != %(i)s ORDER BY firstName ASC;'
-        return connect('flaskWall').query_db(query, data)
+        return connect(myDB).query_db(query, data)
 
     @classmethod
     def getAll(cls):
         query = 'SELECT * FROM users ORDER BY firstName ASC;'
-        return connect('flaskWall').query_db(query)
+        return connect(myDB).query_db(query)
 
     @classmethod
     def getAllButOne(cls, data):
         query = 'SELECT * FROM users WHERE id != %(i)s ORDER BY firstName ASC;'
-        return connect('flaskWall').query_db(query, data)
+        return connect(myDB).query_db(query, data)
 
     @classmethod
     def save(cls, data):
         query = 'Insert INTO users (firstName, lastName, email, password, createdAt) VALUES(%(fn)s, %(ln)s, %(e)s, %(p)s, NOW());'
-        return connect('flaskWall').query_db(query, data)
+        return connect(myDB).query_db(query, data)
 
     @classmethod
     def findById(cls, data):
         query = 'SELECT * FROM users WHERE id = %(i)s;'
-        thisUser = connect('flaskWall').query_db(query, data)
+        thisUser = connect(myDB).query_db(query, data)
         return cls(thisUser[0])
 
     @classmethod
     def deleteById(cls, data):
         query = 'DELETE FROM users WHERE id = %(i)s;'
-        connect('flaskWall').query_db(query, data)
+        connect(myDB).query_db(query, data)
     
     @classmethod
     def follow(cls, data):
         query = 'Insert INTO followers (followedId, followerId, createdAt) VALUES(%(i)s, %(z)s, NOW());'
-        connect('flaskWall').query_db(query, data)
+        connect(myDB).query_db(query, data)
 
     @classmethod
     def unfollow(cls, data):
         query = 'DELETE FROM followers WHERE followerId = %(z)s;'
-        connect('flaskWall').query_db(query, data)
+        connect(myDB).query_db(query, data)
 
 
     @classmethod
     def getFollowers(cls, data):
         query = 'SELECT * FROM followers WHERE followedId = %(i)s ORDER BY createdAt ASC'
-        output = connect('flaskWall').query_db(query, data)
+        output = connect(myDB).query_db(query, data)
         followerIds = []
         for u in output:
             followerIds.append(u['followerId'])

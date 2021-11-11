@@ -1,4 +1,5 @@
 from flask_app.config.mysqlDB import connect
+myDB = 'flaskDojosNinjas'
 
 class Ninja:
     def __init__(self, data):
@@ -13,7 +14,7 @@ class Ninja:
     @classmethod
     def getAll(cls):
         query = 'SELECT * FROM ninjas;'
-        allNinjas = connect('dojosNinjas').query_db(query)
+        allNinjas = connect(myDB).query_db(query)
         ninjas = []
         for n in allNinjas:
             ninjas.append(cls(n))
@@ -22,5 +23,5 @@ class Ninja:
     @classmethod
     def save(cls, data):
         query = 'Insert INTO ninjas (firstName, lastName, age, dojoId, createdAt) VALUES(%(fn)s, %(ln)s, %(a)s, %(d)s, NOW());'
-        ninja = connect('dojosNinjas').query_db(query, data)
+        ninja = connect(myDB).query_db(query, data)
         return ninja

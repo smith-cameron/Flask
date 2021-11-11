@@ -1,5 +1,6 @@
 from recipeApp.config.mysqlDB import connect
 from flask import flash
+myDB = 'flaskRecipes'
 
 class Recipe:
     def __init__(self, data):
@@ -39,22 +40,19 @@ class Recipe:
     @classmethod
     def getAll(cls):
         query = 'SELECT * FROM recipes;'
-        allRecipes = connect('flaskRecipes').query_db(query)
-        return allRecipes
+        return connect(myDB).query_db(query)
 
     @classmethod
     def save(cls, data):
         query = 'Insert INTO recipes (name, description, instructions, lastMade, timeLimit, creatorId, createdAt) VALUES(%(n)s, %(d)s, %(i)s, %(lm)s, %(tl)s, %(c)s, NOW());'
-        recipeId = connect('flaskRecipes').query_db(query, data)
-        return recipeId
+        return connect(myDB).query_db(query, data)
 
     @classmethod
     def findById(cls, data):
         query = 'SELECT * FROM recipes WHERE id = %(i)s;'
-        thisRecipe = connect('flaskRecipes').query_db(query, data)
-        return thisRecipe
+        return connect(myDB).query_db(query, data)
 
     @classmethod
     def deleteById(cls, data):
         query = 'DELETE FROM recipes WHERE id = %(i)s;'
-        thisRecipe = connect('flaskRecipes').query_db(query, data)
+        thisRecipe = connect(myDB).query_db(query, data)

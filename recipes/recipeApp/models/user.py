@@ -2,6 +2,7 @@ from recipeApp.config.mysqlDB import connect
 from flask import flash
 import re
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+myDB = 'flaskRecipes'
 
 class User:
     def __init__(self, data):
@@ -55,7 +56,7 @@ class User:
     @classmethod
     def getByEmail(cls,data):
         query = "SELECT * FROM users WHERE email = %(email)s;"
-        userEmail = connect("flaskRecipes").query_db(query,data)
+        userEmail = connect(myDB).query_db(query,data)
         if len(userEmail) < 1:
             return False
         return cls(userEmail[0])
@@ -63,22 +64,20 @@ class User:
     @classmethod
     def getAll(cls):
         query = 'SELECT * FROM users;'
-        allUsers = connect('flaskRecipes').query_db(query)
-        return allUsers
+        return connect(myDB).query_db(query)
 
     @classmethod
     def save(cls, data):
         query = 'Insert INTO users (firstName, lastName, email, password, createdAt) VALUES(%(fn)s, %(ln)s, %(e)s, %(p)s, NOW());'
-        user_id = connect('flaskRecipes').query_db(query, data)
-        return user_id
+        return connect(myDB).query_db(query, data)
 
     @classmethod
     def findById(cls, data):
         query = 'SELECT * FROM users WHERE id = %(i)s;'
-        thisUser = connect('flaskRecipes').query_db(query, data)
+        thisUser = connect(myDB).query_db(query, data)
         return cls(thisUser[0])
 
     @classmethod
     def deleteById(cls, data):
         query = 'DELETE FROM users WHERE id = %(i)s;'
-        thisUser = connect('flaskRecipes').query_db(query, data)
+        thisUser = connect(myDB).query_db(query, data)

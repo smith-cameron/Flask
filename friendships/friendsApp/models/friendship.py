@@ -1,4 +1,5 @@
 from friendsApp.config.mysqlDB import connect
+myDB = 'flaskFriends'
 
 class Friendship:
     def __init__(self, data):
@@ -11,11 +12,9 @@ class Friendship:
     @classmethod
     def getAll(cls):
         query = 'SELECT u.firstName AS "uFirstName", u.lastName AS "uLastName",u2.firstName AS "fFirstName", u2.lastName AS "fLastName" FROM friendships f JOIN users u ON userId = u.id JOIN users u2 ON friendId = u2.id;'
-        allfriends = connect('friends').query_db(query)
-        return allfriends
+        return connect('friends').query_db(query)
 
     @classmethod
     def save(cls, data):
         query = 'Insert INTO friendships (userId, friendId, createdAt) VALUES(%(ui)s, %(fi)s, NOW());'
-        newFriends = connect('friends').query_db(query, data)
-        return newFriends
+        return connect('friends').query_db(query, data)
