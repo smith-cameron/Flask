@@ -20,18 +20,26 @@ html, body {
     text-align: center;
     text-decoration: underline;
     color:coral;
+    margin-bottom: 15px;
 }
 li{
     list-style-type: none;
     vertical-align: top;
 }
 /* ------- index.html ------- */
+#title{
+    text-decoration: overline underline;
+    padding-top: .8%;
+    color:coral;
+    text-align: center;
+    font-size: 100px;
+}
 #regForm{
     display: inline-block;
     width: fit-content;
     text-align: right;
     vertical-align: top;
-    margin: 17% 150px 0px 28%;
+    margin: 8% 150px 0px 28%;
 }
 .error{
     color: crimson;
@@ -42,7 +50,7 @@ li{
     width: fit-content;
     text-align: right;
     vertical-align: top;
-    margin-top: 17%;
+    margin-top: 8%;
 }
 #pass{  
     color:whitesmoke;
@@ -51,9 +59,20 @@ li{
 .passListItem{
     text-align: center;
 }
+#passListItemLast{
+    text-align: center;
+    margin-bottom: 10px;
+}
 .listMessage{
     text-align: center;
     color: coral;
+}
+.formInput{
+    margin-bottom: 10px;
+}
+.formButton{
+    margin: 0 50% 10px 0;
+    padding: 2px 3px;
 }
 /* ------- dashboard.html ------- */
 /* ------- landing.html ------- */
@@ -70,7 +89,7 @@ header{
 }
 #navTitle{
     display:inline-block;
-    color: black;
+    color: coral;
 }
 .navLink{
     color:coral;

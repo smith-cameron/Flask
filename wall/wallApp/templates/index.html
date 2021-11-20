@@ -8,6 +8,7 @@
 </head>
 <body>
 <div id=wrapper>
+    <h1 id=title>THE WALL</h1>
     <div id=regForm >
         <h2 class=subHead>Register</h2>
         <form action="/register" method="POST">
@@ -20,10 +21,10 @@
                     {% endfor %}
                 {% endif %}
             {% endwith %}
-            <p>First Name: <input type="text" name="firstName"></p>
-            <p>Last Name: <input type="text" name="lastName"></p>
-            <p>Email: <input type="text" name="email"></p>
-            <p>Password: <input type="password" name="password"></p>
+            <p class=formInput>First Name: <input type="text" name="firstName"></p>
+            <p class=formInput>Last Name: <input type="text" name="lastName"></p>
+            <p class=formInput>Email: <input type="text" name="email"></p>
+            <p class=formInput>Password: <input type="password" name="password"></p>
             <div id=pass>
                 <ul>
                     <li class=listMessage>Password requires at leased</li>
@@ -31,13 +32,11 @@
                     <li class=passListItem>One Uppercase Letter</li>
                     <li class=passListItem>One Lowercase Letter</li>
                     <li class=passListItem>One Symbol ($@#%!&*)</li>
-                    <li class=passListItem>and One Number</li>
-                    <ul>
-                    </ul>
+                    <li id=passListItemLast>and One Number</li>
                 </ul>
             </div>
-            <p>Confirm Password: <input type="password" name="passConf"></p>
-            <input type="submit" value="Register">
+            <p class=formInput>Confirm Password: <input type="password" name="passConf"></p>
+            <input class=formButton type="submit" value="Register">
         </form>
     </div>
     <div id=loginForm >
@@ -52,9 +51,9 @@
                     {% endfor %}
                 {% endif %}
             {% endwith %}
-            <p>Email: <input type="text" name="email"></p>
-            <p>Password: <input type="password" name="password"></p>
-            <input type="submit" value="Login">
+            <p class=formInput>Email: <input type="text" name="email"></p>
+            <p class=formInput>Password: <input type="password" name="password"></p>
+            <input class=formButton type="submit" value="Login">
         </form>
     </div>
 </div>
