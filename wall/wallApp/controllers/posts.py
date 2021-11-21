@@ -9,22 +9,16 @@ from datetime import datetime
 dateFormat = "%m/%d/%Y %-I:%M %p"
 
 @app.route('/posts')
-def messageDashboard():
+def postDashboard():
     if 'userId' in session:
         thisUserId = session['userId']
         data = {
                 "i" : thisUserId
             }
-        thisUser = User.findById(data)
-        allButMe = User.getAllButOne(data)
-        allUsers = User.getAll()
-        thisUsersPosts = Post.findByUserId(data)
-        sentCount = Post.sentPostsCount(data)
-        recievedCount = Post.recievedPostCount(data)
-        return render_template('dashboard.html', users = allButMe, user = thisUser, myPosts = thisUsersPosts, sent = sentCount, recieved = recievedCount, dtf = dateFormat)
+        return render_template('postDashboard.html', users = User.getAllButOne(data), user = User.findById(data), sentPosts = Post.findSentByUserId(data), recievedPosts = Post.findRecievedByUserId(data), sentCount = Post.sentPostsCount(data), recievedCount = Post.recievedPostCount(data), dtf = dateFormat)
     return redirect('/')
 
-@app.route('/send', methods=['POST'])
+@app.route('/post/send', methods=['POST'])
 def post():
     if 'userId' in session:
         if Post.validatePost(request.form):
@@ -39,7 +33,7 @@ def post():
         return redirect('/posts')
     return redirect('/')
 
-@app.route('/deletepost/<int:id>')
+@app.route('/post/delete/<int:id>')
 def deletePost(id):
     if 'userId' in session:
         data = {

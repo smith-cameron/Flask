@@ -19,7 +19,7 @@ def landingDashboard():
         followerIds = User.getFollowers(data)
         allButMe = User.getAllButOne(data)
         allUsers = User.getAll()
-        thisUsersPosts = Post.findByUserId(data)
+        thisUsersPosts = Post.findRecievedByUserId(data)
         sentCount = Post.sentPostsCount(data)
         recievedCount = Post.recievedPostCount(data)
         return render_template('landing.html', users = allButMe, user = thisUser, myPosts = thisUsersPosts, sent = sentCount, recieved = recievedCount, dtf = dateFormat, followers = followerIds)
