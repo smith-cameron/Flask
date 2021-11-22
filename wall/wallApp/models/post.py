@@ -34,8 +34,13 @@ class Post:
         return connect(myDB).query_db(query, data)
 
     @classmethod
-    def findByUserId(cls, data):
+    def findRecievedByUserId(cls, data):
         query = 'SELECT * FROM posts m JOIN users u ON m.creatorId = u.id WHERE recipientId = %(i)s;'
+        return connect(myDB).query_db(query, data)
+
+    @classmethod
+    def findSentByUserId(cls, data):
+        query = 'SELECT * FROM posts m JOIN users u ON m.recipientId = u.id WHERE creatorId = %(i)s;'
         return connect(myDB).query_db(query, data)
 
     @classmethod
