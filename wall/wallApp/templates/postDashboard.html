@@ -14,9 +14,15 @@
         <a class=navLink href="/landing">Home</a>
         <a class=navLink href="/logout">Log Out</a>
     </header>
-    <div id=displayMessage>
-        <h3 class=subHead>{{recieved}} Post(s) for You</h3>
-        {% for post in myPosts %}
+    <div id=recievedMessages>
+        <h3 class=subHead>Recieved</h3>
+        <h3 id=subSubHead>You have
+            {% if recievedCount == 1 %}
+                {{recievedCount}} post.</h3>
+            {% else %}
+                {{recievedCount}} posts.</h3>
+            {% endif %}
+        {% for post in recievedPosts %}
         <p class=messageLabel>{{post.firstName}} said:</p>
         <ul id=list>
                 <!-- if message.creator is in my list of friends -->
@@ -25,17 +31,12 @@
                 <!-- else -->
                 <!-- display like button -->
             </ul>
-            <a class=link href="/deletepost/{{post.id}}">Delete</a>
+            <a class=link href="/post/delete/{{post.id}}">Delete</a>
         {% endfor %}
     </div>
     <div id=messageForm>
-        <h3 class=subHead>Make Posts</h3>
-        <p id=subSubHead>You have made
-            {% if sent == 1 %}
-                {{sent}} post.</p>
-            {% else %}
-                {{sent}} posts.</p>
-            {% endif %}
+        <h3 class=subHead> Post Something</h3>
+        
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
@@ -45,7 +46,7 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        <form action="/send" method="POST">
+        <form action="/post/send" method="POST">
             <p class=formLabel>Recipient: </p>
             <select name="recipientId">
                 <option selected disabled>---- Select One ----</option>
@@ -56,6 +57,26 @@
             <p class=formLabel ><input id=contentInput type="text" name="content"></p>
             <input id=submitButton type="submit" value="Send">
         </form>
+    </div>
+    <div id=messageForm>
+        <h3 class=subHead>Sent</h3>
+        <h3 id=subSubHead>You have posted
+            {% if sentCount == 1 %}
+                {{sentCount}} time.</h3>
+            {% else %}
+                {{sentCount}} times.</h3>
+            {% endif %}
+        {% for post in sentPosts %}
+        <p class=messageLabel>You said to {{post.firstName}}</p>
+        <ul id=list>
+                <!-- if message.creator is in my list of friends -->
+                <li class=listItem>{{post.content}}</li>
+                <!-- ulike button -->
+                <!-- else -->
+                <!-- display like button -->
+            </ul>
+            <a class=link href="/deletepost/{{post.id}}">Delete</a>
+        {% endfor %}
     </div>
 </div>
 </body>
