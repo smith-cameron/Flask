@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>burgerMVC</title>
+</head>
+<body>
+<div id=wrapper>
+    <div id=regForm >
+        <h2 class=subHead>Order Burger</h2>
+        <form action="/create/burger" method="POST">
+        <p class=formInput>Name: <input type="text" name="name"></p>
+        <p class=formInput>Bun: <input type="text" name="bun"></p>
+        <p class=formInput>Meat: <input type="text" name="meat"></p>
+        <p >Doneness: <select  name="temp">
+                <option selected disabled>Select One</option>
+                <option value="155">Well</option>
+                <option value="145">Medium</option>
+                <option value="135">Medium Rare</option>
+                <option value="125">Rare</option>
+        </select></p>
+        <p >Restaurant: <select name="restaurantId">
+                <option selected disabled>Select One</option>
+                {% for restaurant in restaurants %}
+                <option value={{restaurant.id}}>{{restaurant.rName}}</option>
+                {% endfor %}
+            </select></p>    
+        <input class=formButton type="submit" value="Place Order">
+        </form>
+    </div>
+</div>
+</body>
+</html>
