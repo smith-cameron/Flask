@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <title>burgerMVC</title>
+</head>
+<body>
+<div id=wrapper>
+    <header>
+        <a class=tableLink href="/">Order a Burger</a>
+    </header>
+    <div id="displayTable">
+        <h2 class=subHead>{{restaurant.rName}}</h2>
+        <table>
+        <thead>
+            <tr class="tableRow">
+                <th class="tableHead">ID</th>
+                <th class="tableHead">Restaurant Name</th>
+                <th class="tableHead">Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="tableData">{{restaurant.id}}</td>
+                <td class="tableData">{{restaurant.rName}}</td>
+                <td class="tableData">{{restaurant.createdAt.strftime(dtf)}}</td>
+            </tr>
+        </tbody>
+        </table>
+        <h2 class=subHead>Burgers Ordered From {{restaurant.name}}</h2>
+        <table>
+            <thead>
+                <th class="tableHead">Name on Order</th>
+                <th class="tableHead">Bun Style</th>
+                <th class="tableHead">Meat</th>
+                <th class="tableHead">Cooking Temp</th>
+                <th class="tableHead">Order Initialized</th>
+            </thead>
+            <tbody>
+                {% for i in restaurant.burgers %}
+                <tr class="tableRow">
+                    <td class="tableData">{{i.name}}</td>
+                    <td class="tableData">{{i.bun}}</td>
+                    <td class="tableData">{{i.meat}}</td>
+                    {% if i.temp == 125 %}
+                    <td class="tableData">Rare</td>
+                    {% endif %}
+                    {% if i.temp == 135 %}
+                    <td class="tableData">Medium Rare</td>
+                    {% endif %}
+                    {% if i.temp == 145 %}
+                    <td class="tableData">Medium</td>
+                    {% endif %}
+                    {% if i.temp == 155 %}
+                    <td class="tableData">Well</td>
+                    {% endif %}
+                    <td class="tableData">{{i.createdAt.strftime(dtf)}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
