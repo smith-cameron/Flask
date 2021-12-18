@@ -19,20 +19,32 @@ html, body {
 .subHead{
     text-align: center;
     text-decoration: underline;
+    color:black;
+    margin: 15px 0px;
+}
+
+.tableLink{
     color:coral;
-    margin-bottom: 15px;
+}
+.tableData{
+    padding-left: 10px;
+}
+.tableHead{
+    color:coral;
 }
 /* ------- index.html ------- */
-
-#regForm{
+p{
+    color:coral;
+}
+#burgerForm{
     display: inline-block;
     width: fit-content;
-    text-align: right;
+    text-align: center;
     vertical-align: top;
-    margin: 8% 150px 0px 28%;
+    margin: 8% 150px 0px 20%;
 }
 .formInput{
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 .formButton{
     margin: 0 50% 10px 0;
@@ -42,4 +54,23 @@ html, body {
     display: inline-block;
     margin: 0 15% 10px 0;
     padding: 2px 3px;
+}
+#restTable{
+    width: fit-content;
+    text-align: center;
+    vertical-align: top;
+    margin: 8% 150px 0px 20%;
+    display: inline-block;
+}
+/* ------- show.html ------- */
+#displayTable{
+    display: inline-block;
+    margin: 20px 0px 20px 30%;
+}
+header{
+    padding-top: 30px;
+    padding-left: 85%;
+}
+.tableRow{
+    margin: 10px;
 }

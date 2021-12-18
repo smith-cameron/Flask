@@ -24,9 +24,15 @@
         <p class=formInput>Restaurant: <select name="restaurantId">
                 <option selected disabled>Select One</option>
                 {% for restaurant in restaurants %}
-                <option value={{restaurant.id}}>{{restaurant.rName}}</option>
+                <option value={{restaurant.id}}>{{restaurant.name}}</option>
                 {% endfor %}
-            </select></p>    
+        </select></p>   
+        <p class=formInput>Toppings: <select name="toppings" multiple>
+            <option selected disabled>Select</option>
+            {% for topping in toppings %}
+            <option value={{topping.id}}>{{topping.name}}</option>
+            {% endfor %}
+        </select></p>
         <input class=formButton type="submit" value="Place Order">
         </form>
     </div>
@@ -44,7 +50,7 @@
             {% for rest in restaurants %}
             <tr class="tableRow">
                 <td class="tableData" >{{rest.id}}</td>
-                <td class="tableData"><a class=tableLink href="/restaurant/{{rest.id}}">{{rest.rName}}</a></td>
+                <td class="tableData"><a class=tableLink href="/restaurant/{{rest.id}}">{{rest.name}}</a></td>
                 <td class="tableData">{{rest.createdAt.strftime(dtf)}}</td>
             </tr>
             {% endfor %}

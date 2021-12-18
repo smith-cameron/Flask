@@ -2,43 +2,42 @@ from flask_app.config.mysqlDB import connect
 from flask_app.models import burger
 myDB = 'flaskburgersmvc'
 
-class Restaurant:
+class Topping:
     def __init__(self, db_data ):
         self.id = db_data['id']
         self.name = db_data['name']
         self.createdAt = db_data['createdAt']
         self.updatedAt = db_data['updatedAt']
-        self.burgers = []
+        self.addOns = []
     
     @classmethod
-    def save(cls, data):
-        query = "INSERT INTO restaurants (name, createdAt) VALUES (%(name)s,NOW());"
-        return connect('myDB').query_db(query,data)
+    def save(cls, data ):
+        query = "INSERT INTO toppings ( topping_name, createdAt , updatedAt ) VALUES (%(topping_name)s,NOW(),NOW());"
+        return connect(myDB).query_db(query, data)
 
     @classmethod
     def getAll(cls):
-        query = "SELECT * FROM restaurants"
+        query = "SELECT * FROM toppings;"
         results = connect(myDB).query_db(query)
         objects = []
         for i in results:
             objects.append(cls(i))
         return objects
-    
+
     @classmethod
-    def getByIdJoinBurgers(cls, data):
-        query = "SELECT * FROM restaurants LEFT JOIN burgers ON burgers.restaurantId = restaurants.id WHERE restaurants.id = %(id)s;"
+    def getByIdJoinBurgers(cls, data ):
+        query = "SELECT * FROM toppings LEFT JOIN add_ons ON add_ons.topping_id = toppings.id LEFT JOIN burgers ON add_ons.burger_id = burgers.id WHERE toppings.id = %(id)s;"
         results = connect(myDB).query_db( query , data )
         object = cls( results[0] )
         for i in results:
-            join_data = {
+            burger_data = {
                 "id" : i["burgers.id"],
                 "name" : i["burgers.name"],
                 "bun" : i["bun"],
-                "meat" : i["meat"],
-                "temp" : i["temp"],
-                "restaurantId" : i["restaurantId"],
+                "calories" : i["temp"],
                 "createdAt" : i["burgers.createdAt"],
                 "updatedAt" : i["burgers.updatedAt"]
             }
-            object.burgers.append( burger.Burger( join_data ) )
+            object.addOns.append( burger.Burger( burger_data ) )
         return object
+
