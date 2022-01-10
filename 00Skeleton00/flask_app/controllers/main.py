@@ -5,7 +5,7 @@ from flask_app.models.user import User
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 from datetime import datetime
-dateFormat = "%m/%d/%Y %-I:%M %p"
+dateFormat = "%m/%d/%Y %I:%M %p"
 
 @app.route('/')
 def index():
@@ -21,6 +21,7 @@ def register():
             "e" : request.form['email'],
             "p" : pw_hash
         }
+        
         userId = User.save(data)
         session['userId'] = userId
         print(session['userId'])
