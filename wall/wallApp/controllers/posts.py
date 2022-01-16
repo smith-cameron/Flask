@@ -23,8 +23,9 @@ def post():
     if 'userId' in session:
         if Post.validatePost(request.form):
             creator = session['userId']
+            print(request.form)
             data = {
-                    "c" : request.form['content'],
+                    "c" : request.form['contnt'],
                     "ci" : creator,
                     "ri" : request.form['recipientId']
                 }

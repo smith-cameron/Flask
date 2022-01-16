@@ -31,6 +31,7 @@ class Post:
     @classmethod
     def save(cls, data):
         query = 'Insert INTO posts (content, creatorId, recipientId, createdAt) VALUES(%(c)s, %(ci)s, %(ri)s, NOW());'
+        print(query)
         return connect(myDB).query_db(query, data)
 
     @classmethod
