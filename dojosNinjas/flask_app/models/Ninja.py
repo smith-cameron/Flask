@@ -4,12 +4,12 @@ myDB = 'flaskDojosNinjas'
 class Ninja:
     def __init__(self, data):
         self.id = data['id']
-        self.firstName = data['fn']
-        self.lastName = data['ln']
-        self.age = data['e']
-        self.dojoId = data['dId']
-        self.createdAt = data['created_at']
-        self.updatedAt = data['updated_at']
+        self.firstName = data['firstName']
+        self.lastName = data['lastName']
+        self.age = data['age']
+        self.dojoId = data['dojoId']
+        self.createdAt = data['createdAt']
+        self.updatedAt = data['updatedAt']
 
     @classmethod
     def getAll(cls):
@@ -22,6 +22,5 @@ class Ninja:
 
     @classmethod
     def save(cls, data):
-        query = 'Insert INTO ninjas (firstName, lastName, age, dojoId, createdAt) VALUES(%(fn)s, %(ln)s, %(a)s, %(d)s, NOW());'
-        ninja = connect(myDB).query_db(query, data)
-        return ninja
+        query = 'Insert INTO ninjas (firstName, lastName, age, dojoId, createdAt) VALUES(%(firstName)s, %(lastName)s, %(age)s, %(dojoId)s, NOW());'
+        return connect(myDB).query_db(query, data)
