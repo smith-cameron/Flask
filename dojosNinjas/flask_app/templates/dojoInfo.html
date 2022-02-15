@@ -13,9 +13,7 @@
         <a class=navLink href="/ninjas">Add Ninja</a>
     </header>
     <div >
-        {% for d in dojo %}
-        <h1 class=head>{{d.name}} Ninjas</h1>
-        {% endfor %}
+        <h1 class=head>{{dojo.name}} Ninjas</h1>
     </div>
     <div>
         <table id="ninjasTable">
@@ -28,7 +26,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for ninja in ninjas %}
+                {% for ninja in dojo.ninjas %}
                 <tr>
                     <td class=tableData >{{ninja.id}}</td>
                     <td class=tableData>{{ninja.firstName}} {{ninja.lastName}}</td>
