@@ -17,10 +17,10 @@ def dojos():
 @app.route('/dojos',methods=['POST'])
 def createDojo():
 	data = {
-            "n" : request.form['name']
+            "name" : request.form['name']
     }
 	print(Dojo.save(data))
-	return redirect('/')
+	return redirect('/dojos')
 
 @app.route('/ninjas')
 def ninjas():
@@ -28,22 +28,24 @@ def ninjas():
 
 @app.route('/ninjas',methods=['POST'])
 def createNinja():
+    print(request.form)
     data = {
-            "fn" : request.form['firstName'],
-            "ln" : request.form['lastName'],
-            "a" : request.form['age'],
-            "d" : request.form['dojoId']
+            "firstName" : request.form['firstName'].capitalize(),
+            "lastName" : request.form['lastName'].capitalize(),
+            "age" : request.form['age'],
+            "dojoId" : request.form['dojoId']
     }
     Ninja.save(data)
-    dojoId = data['d']
+    dojoId = data['dojoId']
     return redirect(f'/dojos/{dojoId}')
 
 @app.route('/dojos/<int:id>')
 def showDojo(id):
     data = {
-            "i" : id
+            "id" : id
     }
-    return render_template('dojoInfo.html', dojo = Dojo.getById(data), ninjas = Dojo.getNinjas(data), dtf = dateFormat)
+    print(Dojo.getDojoJoinNinjas(data).ninjas)
+    return render_template('dojoInfo.html', dojo = Dojo.getDojoJoinNinjas(data), dtf = dateFormat)
 
 
 @app.route('/logout')
