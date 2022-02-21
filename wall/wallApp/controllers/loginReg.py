@@ -13,8 +13,7 @@ def index():
 
 @app.route('/register',methods=['POST'])
 def register():
-    emailInput = { "e" : request.form['email']}
-    if User.validateRegistration(request.form) and User.uniqueEmail(emailInput):
+    if User.validateRegistration(request.form) and User.uniqueEmail({ "e" : request.form['email']}):
         pw_hash = bcrypt.generate_password_hash(request.form['password'])
         data = {
             "fn" : request.form['firstName'].capitalize(),

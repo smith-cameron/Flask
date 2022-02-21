@@ -15,18 +15,24 @@ def postDashboard():
         data = {
                 "i" : thisUserId
             }
-        return render_template('postDashboard.html', users = User.getAllButOne(data), user = User.findById(data), sentPosts = Post.findSentByUserId(data), recievedPosts = Post.findRecievedByUserId(data), sentCount = Post.sentPostsCount(data), recievedCount = Post.recievedPostCount(data), dtf = dateFormat)
+        return render_template('postDashboard.html', 
+        users = User.getAllButOne(data), 
+        user = User.findById(data), 
+        sentPosts = Post.findSentByUserId(data), 
+        recievedPosts = Post.findRecievedByUserId(data), 
+        sentCount = Post.sentPostsCount(data), 
+        recievedCount = Post.recievedPostCount(data), 
+        dtf = dateFormat)
     return redirect('/')
 
 @app.route('/post/send', methods=['POST'])
 def post():
     if 'userId' in session:
         if Post.validatePost(request.form):
-            creator = session['userId']
             print(request.form)
             data = {
-                    "c" : request.form['contnt'],
-                    "ci" : creator,
+                    "c" : request.form['content'],
+                    "ci" : session['userId'],
                     "ri" : request.form['recipientId']
                 }
             Post.save(data)
@@ -34,14 +40,14 @@ def post():
         return redirect('/posts')
     return redirect('/')
 
-@app.route('/post/delete/<int:id>')
+@app.route('/delete/post/<int:id>')
 def deletePost(id):
     if 'userId' in session:
         data = {
                 "i" : id
             }
         thisMessage = Post.findById(data)
-        if session['userId'] == thisMessage.recipientId:
+        if session['userId'] == thisMessage.creatorId:
             Post.deleteById(data)
             return redirect('/posts')
         return redirect('/')

@@ -11,27 +11,25 @@ dateFormat = "%m/%d/%Y %-I:%M %p"
 @app.route('/landing')
 def landingDashboard():
     if 'userId' in session:
-        thisUserId = session['userId']
         data = {
-            "i" : thisUserId
+            "i" : session['userId']
             }
-        thisUser = User.findById(data)
-        followerIds = User.getFollowers(data)
-        allButMe = User.getAllButOne(data)
-        allUsers = User.getAll()
-        thisUsersPosts = Post.findRecievedByUserId(data)
-        sentCount = Post.sentPostsCount(data)
-        recievedCount = Post.recievedPostCount(data)
-        return render_template('landing.html', users = allButMe, user = thisUser, myPosts = thisUsersPosts, sent = sentCount, recieved = recievedCount, dtf = dateFormat, followers = followerIds)
+        return render_template('landing.html', 
+        users = User.getAllButOne(data), 
+        user = User.findById(data), 
+        myPosts = Post.findRecievedByUserId(data), 
+        sent = Post.sentPostsCount(data), 
+        recieved = Post.recievedPostCount(data), 
+        dtf = dateFormat, 
+        followers = User.getFollowers(data))
     return redirect('/')
 
-@app.route('/follow/<int:toFollow>')
-def follow(toFollow):
+@app.route('/follow/<int:followed>')
+def follow(followed):
     if 'userId' in session:
-        loggedUserId = session['userId']
         data = {
-            "i" : loggedUserId,
-            "z" : toFollow
+            "i" : session['userId'],
+            "z" : followed
             }
         User.follow(data)
         return redirect('/landing')
@@ -50,22 +48,42 @@ def unFollow(toUnFollow):
 @app.route('/user/edit')
 def edidUser():
     if 'userId' in session:
-        loggedUserId = session['userId']
         data = {
-            "i" : loggedUserId
+            "i" : session['userId']
             }
+        return render_template('editUser.html', 
+        user = User.findById(data) )
+    return redirect('/')
 
-
+@app.route('/user/edit', methods=['POST'])
+def edidUserPOST():
+    if 'userId' in session:
+        if request.form['email'] != User.findById({"i" : session['userId']}).email:
+            if not User.uniqueEmail({ "e" : request.form['email']}):
+                return redirect('/user/edit')
+        if User.validateUserUpdate(request.form) :
+            data = {
+                "fn" : request.form['firstName'].capitalize(),
+                "ln" : request.form['lastName'].capitalize(),
+                "e" : request.form['email'],
+                "i" : session['userId']
+            }
+            User.findById({"i" : session['userId']}).updateUser(data)
+            return redirect('/user/edit')
+        return redirect('/user/edit')
+    return redirect('/')
 
 # landing.html
     # All users/ whos logged in 
         # Like/Unlike User/Make Friends
+    # Select a user to see their wall
+    # Private messaging
     # Recent posts(since last login)
         # to your wall
         # to other walls
     # Pictures??
     # links to 
-        # Edit Your User Info - Validate
+        # Edit Your Password - Validate
 # Post dashboard.html 
     # Like/Unlike Post
     # Like/Unlike Comments
