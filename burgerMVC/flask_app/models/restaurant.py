@@ -28,8 +28,11 @@ class Restaurant:
     def getByIdJoinBurgers(cls, data):
         query = "SELECT * FROM restaurants LEFT JOIN burgers ON burgers.restaurantId = restaurants.id WHERE restaurants.id = %(id)s;"
         results = connect(myDB).query_db( query , data )
+        print(results)
         object = cls( results[0] )
+        print(object)
         for i in results:
+            print(i['id'])
             join_data = {
                 "id" : i["burgers.id"],
                 "name" : i["burgers.name"],
@@ -41,4 +44,5 @@ class Restaurant:
                 "updatedAt" : i["burgers.updatedAt"]
             }
             object.burgers.append( burger.Burger( join_data ) )
+        print(object)
         return object
