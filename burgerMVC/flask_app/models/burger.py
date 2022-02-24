@@ -43,3 +43,7 @@ class Burger:
             }
             object.toppings.append( topping.Topping( topping_data ) )
         return object
+
+    @classmethod
+    def getAllJoinRest(cls):
+        query = "SELECT * FROM burgers LEFT JOIN restaurants ON burgers.restaurantId = restaurants.id;"
