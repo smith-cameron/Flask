@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Welcome {{ user.first_name }} {{ user.last_name }}!</h1>
+        <div class="buttons">
+            <form action="/recipe/new">
+                <input type="submit" class="button" value="Create">
+            </form>
+            <form action="/logout">
+                <input type="submit" class="button" value="Logout">
+            </form>
+        </div>
+    </div>
+    <div class="body">
+        <p>These are the recipes</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Under 30 Minutes?</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for recipe in recipes %}
+                <tr>
+                    <td>{{ recipe.name }}</td>
+                    {% if recipe.under_30 == 1 %}
+                    <td>Yes</td>
+                    {% else %}
+                    <td>No</td>
+                    {% endif %}
+                    <td>
+                        <a href="/recipe/{{ recipe.id }}">view instructions</a>
+                        {% if recipe.user_id == session.user_id %}
+                        <a href="/recipe/edit/{{ recipe.id }}">edit</a>
+                        <a href="/delete/{{ recipe.id }}">delete</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

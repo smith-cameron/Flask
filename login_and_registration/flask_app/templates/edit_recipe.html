@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <title>New Recipe</title>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Edit Recipe</h1>
+        <div class="buttons">
+            <form action="/dashboard">
+                <input type="submit" class="button" value="Dashboard">
+            </form>
+            <form action="/logout">
+                <input type="submit" class="button" value="Logout">
+            </form>
+        </div>
+    </div>
+    <form action="/recipe/update" method="post">
+        <div class="container">
+            <div class="column">
+                {% with messages = get_flashed_messages() %}    <!-- declare a variable called messages -->
+                    {% if messages %}                           <!-- check if there are any messages -->
+                        {% for message in messages %}           <!-- loop through the messages -->
+                            <p>{{message}}</p>                  <!-- display each message in a paragraph tag -->
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <input type="hidden" name="id" id="id" value="{{ recipe.id }}">
+                <label for="name">Name:</label>
+                <input type="text" class="textbox" name="name" id="name" value="{{ recipe.name }}">
+                <label for="description">Description:</label>
+                <textarea class="textbox" name="description" id="description">{{ recipe.description }}</textarea>
+                <label for="instructions">Instructions:</label>
+                <textarea class="textbox" name="instructions" id="instructions">{{ recipe.instructions }}</textarea>
+                <input type="submit" class="button" value="Update">
+            </div>
+            <div class="column">
+                <div class="date">
+                    <label for="date_created">Date Made On:</label>
+                    <input type="date" id="date_created" name="date_created" value="{{ recipe.date_made.strftime('%Y-%m-%d') }}">
+                </div>
+                <label for="under_30">Under 30 Minutes?</label>
+                <div class="buttons">
+                    <input type="radio" class="inline" id="Yes" name="under_30" value="1" 
+                    {% if recipe.under_30 == 1 %}
+                    checked
+                    {% endif %}>
+                    <label class="inline" for="Yes">Yes</label>
+                </div>
+                <div class="buttons">
+                    <input type="radio" class="inline" id="No" name="under_30" value="0"
+                    {% if recipe.under_30 == 0 %}
+                    checked
+                    {% endif %}>
+                    <label class="inline" for="No">No</label>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

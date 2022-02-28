@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <title>Recipe</title>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Welcome {{ user.first_name }} {{ user.last_name }}!</h1>
+        <div class="buttons">
+            <form action="/dashboard">
+                <input type="submit" class="button" value="Dashboard">
+            </form>
+            <form action="/logout">
+                <input type="submit" class="button" value="Logout">
+            </form>
+        </div>
+    </div>
+    <div class="body">
+        <h1>{{ recipe.name }}</h1>
+        <div id="recipe-instructions">
+            <table class="recipe-card">
+                <tbody>
+                    <tr>
+                        <td>Description:</td>
+                        <td>{{ recipe.description }}</td>
+                    </tr>
+                    <tr>
+                        <td>Under 30 Minutes:</td>
+                        <td>
+                            {% if recipe.under_30 == 1 %}
+                            Yes
+                            {% else %}
+                            No
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Instructions:</td>
+                        <td>
+                            <p>{{ recipe.instructions }}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Date Made:</td>
+                        <td>{{ recipe.date_made.strftime('%Y-%m-%d') }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
