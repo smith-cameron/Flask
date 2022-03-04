@@ -12,11 +12,9 @@
         <a class=navLink href="/dojos">Home</a>
         <a class=navLink href="/ninjas">Add Ninja</a>
     </header>
-    <div >
+    <div id="ninjasTable">
         <h1 class=head>{{dojo.name}} Ninjas</h1>
-    </div>
-    <div>
-        <table id="ninjasTable">
+        <table >
             <thead>
                 <tr>
                     <th>ID</th>
@@ -28,7 +26,7 @@
             <tbody>
                 {% for ninja in dojo.ninjas %}
                 <tr>
-                    <td class=tableData >{{ninja.id}}</td>
+                    <td class=tableData>{{ninja.id}}</td>
                     <td class=tableData>{{ninja.firstName}} {{ninja.lastName}}</td>
                     <td class=tableData>{{ninja.age}}</td>
                     <td class=tableData>{{ninja.createdAt.strftime(dtf)}}</td>

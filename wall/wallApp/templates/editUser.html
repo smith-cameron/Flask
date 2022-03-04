@@ -5,24 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit {{user.firstName}}'s Info</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/editUserStyle.css') }}">
 </head>
 <body>
-    <div id=regForm >
+<div id=wrapper>
+    <header>
+        <h1 id=head>{{user.firstName}}'s Information</h1>
+        <h2 id=navTitle></h2>
+        <a class=navLink href="/landing">Home</a>
+        <a class=navLink href="/logout">Log Out</a>
+    </header>
+    <div id=editForm >
         <h2 class=subHead>Edit Your Information</h2>
         <form action="/user/edit" method="POST">
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% for category, message in messages %}
-                        {% if category == "editError" %}
+                        {% if category == "editError" or category == "regError" %}
                             <p class=error>{{message}}</p>
                         {% endif %}
                     {% endfor %}
                 {% endif %}
             {% endwith %}
-            <p>First Name: <input type="text" name="firstName" value={{user.firstName}}></p>
-            <p>Last Name: <input type="text" name="lastName" value={{user.firstName}}></p>
-            <p>Email: <input type="text" name="email" value={{user.firstName}}></p>
+            <p class=formInput>First Name: <input type="text" name="firstName" value={{user.firstName}}></p>
+            <p class=formInput>Last Name: <input type="text" name="lastName" value={{user.lastName}}></p>
+            <p class=formInput>Email: <input type="text" name="email" value={{user.email}}></p>
+            <!-- <p class=formInput>Password: <input type="password" name="password" value={{user.password}}></p>
+            <div id=pass>
+                <ul>
+                    <li class=listMessage>Password requires at leased</li>
+                    <li class=listMessage>8 characters containing:</li>
+                    <li class=passListItem>One Uppercase Letter</li>
+                    <li class=passListItem>One Lowercase Letter</li>
+                    <li class=passListItem>One Symbol ($@#%!&*)</li>
+                    <li id=passListItemLast>and One Number</li>
+                </ul>
+            </div>
+            <p class=formInput>Confirm Password: <input type="password" name="passConf"></p> -->
+            <!-- <a href="" class="">Change Password</a> -->
+            <input class=formButton type="submit" value="Update">
+        
         </form>
     </div>
+</div>
 </body>
 </html>

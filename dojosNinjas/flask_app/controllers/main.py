@@ -42,13 +42,9 @@ def createNinja():
 @app.route('/dojos/<int:id>')
 def showDojo(id):
     data = {
-            "id" : id
+        "id" : id
     }
+    print(Dojo.getDojoJoinNinjas(data))
     print(Dojo.getDojoJoinNinjas(data).ninjas)
     return render_template('dojoInfo.html', dojo = Dojo.getDojoJoinNinjas(data), dtf = dateFormat)
 
-
-@app.route('/logout')
-def sessionReset():
-    session.clear()
-    return redirect("/")

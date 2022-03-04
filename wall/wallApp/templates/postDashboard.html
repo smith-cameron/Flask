@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/postDashStyle.css') }}">
     <title>Wall</title>
 </head>
 <body>
@@ -75,7 +75,7 @@
                 <!-- else -->
                 <!-- display like button -->
             </ul>
-            <a class=link href="/deletepost/{{post.id}}">Delete</a>
+            <a class=link href="/delete/post/{{post.id}}">Delete</a>
         {% endfor %}
     </div>
 </div>

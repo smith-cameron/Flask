@@ -1,4 +1,4 @@
-    from recipeApp import app
+from recipeApp import app
 from flask import Flask
 from flask import render_template, request, redirect, session, flash
 from recipeApp.controllers import loginReg
@@ -14,39 +14,34 @@ def dashboard():
         data = {
                 "i" : thisUserId
             }
-        thisUser = User.findById(data)
-        allRecipes = Recipe.getAll()
-        print(thisUser)
-        return render_template('dashboard.html', recipes = allRecipes, user = thisUser, dtf = dateFormat)
+        return render_template('dashboard.html', recipes = Recipe.getAll(), user = User.findById(data), dtf = dateFormat)
     return redirect('/')
 
 @app.route('/create')
 def renderCreate():
     if 'userId' in session:
-        thisUserId = session['userId']
         data = {
-                "i" : thisUserId
+                "i" : session['userId']
             }
-        thisUser = User.findById(data)
-        return render_template('recipeNew.html', user = thisUser)
+        return render_template('recipeNew.html', user =  User.findById(data))
     return redirect('/')
 
 @app.route('/create',methods=['POST'])
 def createRecipe():
-    print(request.form)
-    if Recipe.validate(request.form):
-        data = {
-            "n" : request.form['name'].title(),
-            "d" : request.form['desc'],
-            "i" : request.form['inst'],
-            "lm" : request.form['lastMade'],
-            "tl" : request.form['timeLimit'],
-            "c" : request.form['creator']
-        }
-        recipeId = Recipe.save(data)
-        print(recipeId)
-        return redirect('/home')
-    return redirect('/create')
+    if 'userId' in session:
+        if Recipe.validate(request.form):
+            data = {
+                "name" : request.form['name'].title(),
+                "d" : request.form['desc'],
+                "i" : request.form['inst'],
+                "lm" : request.form['lastMade'],
+                "tl" : request.form['timeLimit'],
+                "c" : request.form['creator']
+            }
+            Recipe.save(data)
+            return redirect('/home')
+        return redirect('/create')
+    return redirect('/')
 
 @app.route('/user/<int:id>/delete')
 def deleteUser(id):
@@ -93,8 +88,9 @@ def showRecipe(id):
         data = {
                 "i" : thisUserId
             }
-        thisRecipe = Recipe.findById(rdata)
+        Recipe.findById(rdata)
         thisUser = User.findById(data)
+        thisRecipe = Recipe.findByIdJoinCreator(rdata)
         return render_template('recipeDisplay.html', recipe = thisRecipe, user = thisUser, dtf = dateFormat)
     return redirect('/')
 

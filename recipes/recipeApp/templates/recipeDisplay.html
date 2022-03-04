@@ -11,8 +11,8 @@
     <header>
         <a class=navLink href="/logout">Log Out</a>
         <a class=navLink href="/home">Dashboard</a>
-        {% for r in recipe %}
-        <h1 id=head>Recipe {{r.id}}: {{r.name}}</h1>
+        
+        <h1 id=head>Recipe {{recipe.id}}: {{recipe.name}}</h1>
     </header>
     <div id="displayTable">
         <table>
@@ -28,19 +28,21 @@
         </thead>
         <tbody>
             <tr>
-                <td class="tableData" >{{r.name}}</td>
-                <td class="tableData" >{{r.description}}</td>
-                <td class="tableData" >{{r.instructions}}</td>
-                <td class="tableData" >{{r.lastMade.strftime(dtf)}}</td>
-                {% if r.timeLimit == 0%}
+                <td class="tableData" >{{recipe.name}}</td>
+                <td class="tableData" >{{recipe.description}}</td>
+                <td class="tableData" >{{recipe.instructions}}</td>
+                <td class="tableData" >{{recipe.lastMade}}</td>
+                {% if recipe.timeLimit == 0 %}
                 <td class="tableData">False</td>
                 {% else %}
                 <td class="tableData">True</td>
                 {% endif %}
-                <td class="tableData"><a class="link" href="/recipe/{{r.id}}">Show</a>
-                    {% if user.id == r.creatorId %} | <a class="link" href="/recipe/{{r.id}}/edit">Edit</a> | <a class="link" href="/recipe/{{r.id}}/delete">Delete</a></td>
+                <td class="tableData"><a class="link" href="/recipe/{{recipe.id}}">Show</a>
+                    {% if user.id == recipe.creatorId %} | <a class="link" href="/recipe/{{recipe.id}}/edit">Edit</a> | <a class="link" href="/recipe/{{recipe.id}}/delete">Delete</a></td>
                 {% endif %}
             </tr>
+            {% for c in recipe.creator %}
+            <h3>Created By: {{c.firstName}} {{c.lastName}}</h3>
             {% endfor %}
         </tbody>
         </table>

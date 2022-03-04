@@ -25,17 +25,21 @@
         </thead>
         <tbody>
             {% for recipe in recipes %}
-            <tr>
-                <td class="tableData" >{{recipe.name}}</td>
-                {% if recipe.timeLimit == 0%}
-                <td class="tableData">False</td>
-                {% else %}
-                <td class="tableData">True</td>
-                {% endif %}
-                <td class="tableData"><a class="link" href="/recipe/{{recipe.id}}">Show</a>
-                    {% if user.id == recipe.creatorId %} | <a class="link" href="/recipe/{{recipe.id}}/edit">Edit</a> | <a class="link" href="/recipe/{{recipe.id}}/delete">Delete</a></td>
-                {% endif %}
-            </tr>
+                <tr>
+                    <td class="tableData" >{{recipe.name}}</td>
+                    {% if recipe.timeLimit == 0 %}
+                        <td class="tableData">False</td>
+                    {% else %}
+                        <td class="tableData">True</td>
+                    {% endif %}
+                        <td class="tableData">
+                            <a class="link" href="/recipe/{{recipe.id}}">Show</a>
+                            {% if user.id == recipe.creatorId %} | 
+                                <a class="link" href="/recipe/{{recipe.id}}/edit">Edit</a> | 
+                                <a class="link" href="/recipe/{{recipe.id}}/delete">Delete</a>
+                            {% endif %}
+                        </td>
+                </tr>
             {% endfor %}
         </tbody>
         </table>

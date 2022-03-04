@@ -19,17 +19,17 @@ class User:
         allowedSymbols =['$', '@', '#', '%', '!', '&', '*']
         valid = True
         if len(request['firstName']) < 1:
-                flash("**First Name Required**", "regError")
-                valid = False
+            flash("**First Name Required**", "regError")
+            valid = False
         if len(request['firstName']) >= 1 and len(request['firstName']) < 2:
-                flash("**First Name Must Be 2 Characters Or More**", "regError")
-                valid = False
+            flash("**First Name Must Be 2 Characters Or More**", "regError")
+            valid = False
         if len(request['lastName']) < 1:
-                flash("**Last Name Required**", "regError")
-                valid = False
+            flash("**Last Name Required**", "regError")
+            valid = False
         if len(request['lastName']) >= 1 and len(request['lastName']) < 2:
-                flash("**Last Name Must Be 2 Characters Or More**", "regError")
-                valid = False
+            flash("**Last Name Must Be 2 Characters Or More**", "regError")
+            valid = False
         if not EMAIL_REGEX.match(request['email']):
             flash("**Invalid Email Address**", "regError")
             valid = False
@@ -60,13 +60,63 @@ class User:
         return valid
 
     @staticmethod
+    def validateUserUpdate(request):
+        valid = True
+        if len(request['firstName']) < 1:
+            flash("**First Name Required**", "editError")
+            valid = False
+        if len(request['firstName']) >= 1 and len(request['firstName']) < 2:
+            flash("**First Name Must Be 2 Characters Or More**", "editError")
+            valid = False
+        if len(request['lastName']) < 1:
+            flash("**Last Name Required**", "editError")
+            valid = False
+        if len(request['lastName']) >= 1 and len(request['lastName']) < 2:
+            flash("**Last Name Must Be 2 Characters Or More**", "editError")
+            valid = False
+        if not EMAIL_REGEX.match(request['email']):
+            flash("**Invalid Email Address**", "editError")
+            valid = False
+        if len(request['email']) < 1:
+            flash("**Email Required**", "editError")
+            valid = False
+        return valid
+
+    @staticmethod
+    def validatePasswordUpdate(request):
+        allowedSymbols =['$', '@', '#', '%', '!', '&', '*']
+        valid = True
+        if len(request['password']) < 1:
+            flash("**Password Required**", "passError")
+            valid = False
+        if len(request['password']) >= 1 and len(request['password']) < 8 or len(request['password']) > 20:
+            flash("**Password Must Be 8-20 Characters**", "passError")
+            valid = False
+        if not any(char.isdigit() for char in request['password']):
+            print('**Password Requires Minimum Of One Number**', "passError")
+            valid = False
+        if not any(char.isupper() for char in request['password']):
+            print('**Password Requires Minimum Of One Uppercase Letter**', "passError")
+            valid = False
+        if not any(char.islower() for char in request['password']):
+            print('**Password Requires Minimum Of One Lowercase Letter**', "passError")
+            valid = False
+        if not any(char in allowedSymbols for char in request['password']):
+            print('**Password Requires Minimum Of One Symbol $@#%!&**', "passError")
+            valid = False
+        if request['password'] != request['passConf']:
+            flash("**Passwords Do Not Match**", "passError")
+            valid = False
+        return valid
+
+    @staticmethod
     def uniqueEmail(data):
         valid = True
         query = "SELECT * FROM users WHERE email = %(e)s;"
         results = connect(myDB).query_db(query,data)
         if len(results) > 0:
             flash("**Email Already Registered**", "regError")
-            flash("**Either Log In or Choose Another**", "regError")
+            # flash("**Either Log In or Choose Another**", "regError")
             valid = False
         return valid
 
@@ -77,11 +127,6 @@ class User:
         if len(results) < 1:
             return False
         return cls(results[0])
-
-    @classmethod
-    def getAllOthers(cls, data):
-        query = 'SELECT * FROM users WHERE id != %(i)s ORDER BY firstName ASC;'
-        return connect(myDB).query_db(query, data)
 
     @classmethod
     def getAll(cls):
@@ -119,7 +164,6 @@ class User:
         query = 'DELETE FROM followers WHERE followerId = %(z)s;'
         connect(myDB).query_db(query, data)
 
-
     @classmethod
     def getFollowers(cls, data):
         query = 'SELECT * FROM followers WHERE followedId = %(i)s ORDER BY createdAt ASC'
@@ -128,3 +172,8 @@ class User:
         for u in output:
             followerIds.append(u['followerId'])
         return followerIds
+
+    @classmethod
+    def updateUser(cls, data):
+        query = "UPDATE users SET firstName = %(fn)s, lastName = %(ln)s, email = %(e)s WHERE id = %(i)s;"
+        connect(myDB).query_db(query, data)
