@@ -11,7 +11,7 @@
     <h1 id=title>THE WALL</h1>
     <div id=regForm >
         <h2 class=subHead>Register</h2>
-        <form action="/register" method="POST">
+        <form action="/register" method='POST'>
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% for category, message in messages %}
