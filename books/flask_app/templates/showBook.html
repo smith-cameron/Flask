@@ -7,13 +7,12 @@
     <title>Book Info</title>
 </head>
 <body>
-    {% for b in book %}
 <div id=wrapper>
     <header>
         <a class=navLink href="/authors">Authors</a> | <a class=navLink href="/books">Books</a>
     </header>
     <div id=displayDiv>
-        <h1 class=head>Title: {{b.title}}</h1>
+        <h1 class=head>Title: {{book.title}}</h1>
         <table >
         <thead>
             <tr>
@@ -25,9 +24,9 @@
         </thead>
         <tbody>
             <tr>
-                <td class="tableData" >{{b.id}}</td>
-                <td class="tableData">{{b.pageCount}}</td>
-                <td class="tableData">{{b.createdAt.strftime(dtf)}}</td>
+                <td class="tableData" >{{book.id}}</td>
+                <td class="tableData">{{book.pageCount}}</td>
+                <td class="tableData">{{book.createdAt.strftime(dtf)}}</td>
                 <!-- <td class="tableData"><a class="link" href="/books/{{book.id}}/edit">Edit</a> | <a class="link" href="/users/{{book.id}}/delete">Delete</a></td> -->
             </tr>
         </tbody>
@@ -35,7 +34,7 @@
     </div>
     <div id="inputForm" >
         <h1 class=head>Add Books's Favorites</h1>
-        <form action="/books/{{b.id}}/addAuthor" method="POST">
+        <form action="/book/{{book.id}}" method="POST">
             <h4>Author: <select type="text" name="authId"></h4>
             {% for a in authors %}
             <option value={{a.id}}>{{a.name}}</option>
@@ -51,7 +50,6 @@
             {% endfor %}
         </ul>
     </div>
-    {% endfor %}
 </div>
 </body>
 </html>
