@@ -7,14 +7,14 @@ app.secret_key = 'secret_keyy'
 def index():
     if 'count' not in session:
         session['count'] = 1
-        session['dd'] = 1
-        print("count: {}".format(session['count']))
-        print("dd: {}".format(session['dd']))
+        # session['dd'] = 1
+        # print("count: {}".format(session['count']))
+        # print("dd: {}".format(session['dd']))
     else:
         session['count'] += 1
-        session['dd'] = session['count']
-        print("count: {}".format(session['count']))
-        print("dd: {}".format(session['dd']))
+        # session['dd'] = session['count']
+        # print("count: {}".format(session['count']))
+        # print("dd: {}".format(session['dd']))
     return render_template('index.html')
 
 @app.route('/reset')
