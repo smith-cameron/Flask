@@ -1,6 +1,6 @@
 from recipeApp.config.mysqlDB import connect
 from flask import flash
-from recipeApp.models.user import User
+# from recipeApp.models.user import User
 myDB = 'flaskRecipes'
 
 class Recipe:

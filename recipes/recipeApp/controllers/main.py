@@ -30,6 +30,7 @@ def renderCreate():
 def createRecipe():
     if 'userId' in session:
         if Recipe.validate(request.form):
+            print(request.form)
             data = {
                 "name" : request.form['name'].title(),
                 "d" : request.form['desc'],
